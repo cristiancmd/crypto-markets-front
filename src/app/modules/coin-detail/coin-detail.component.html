@@ -1,0 +1,71 @@
+<div class="row mt-2">
+
+
+  <nav aria-label="breadcrumb ">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/coins">Coins</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ coin.name }}</li>
+    </ol>
+  </nav>
+
+  <div class="row align-items-start">
+    <div class="row">
+      <div class="row">
+
+      </div>
+
+      <div class="row mt-2 mb-2">
+        <h2> <img *ngIf="coin.symbol" src="assets/svg/color/{{coin.symbol?.toLowerCase()}}.svg" alt="btc" style="width: 50px; height: auto;">
+           {{ " " }} {{ coin.name }}</h2>
+      </div>
+      <div class="col ">
+        <h5>{{ coin.symbol }}</h5>
+      </div>
+      <div class="col ">
+        <h5 class="right-align">{{ coin.avgPrice | currency }}</h5>
+      </div>
+      <div class="col ">
+        <a href="{{ coin.wikiUrl }}" class="url">{{
+          coin.wikiUrl
+        }}</a>
+      </div>
+      <div class="col ">
+        <h6 class="right-align">{{ coin.description }}</h6>
+      </div>
+    </div>
+
+    <div class="row align-items-start mt-4 mb-4">
+      <div class="col ">
+        <label>Seleccione exchange</label>
+
+        <select
+          class="form-select "
+          (change)="onSelectExchange($any($event.target).value)"
+          [(ngModel)]="selected"
+        >
+          <option *ngFor="let exchange of exchanges" [value]="exchange.id">
+            {{ exchange.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col ">
+        <label>Seleccione rango</label>
+
+        <select
+          class="form-select"
+          (change)="onSelectRange($any($event.target).value)"
+          [(ngModel)]="last"
+        >
+          <option *ngFor="let range of ranges" [value]="range.value">
+            {{ range.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="prices.length > 0 && exchanges.length > 0">
+    <h5>Grafico</h5>
+    <app-chart [datos]="prices"></app-chart>
+  </div>
+</div>

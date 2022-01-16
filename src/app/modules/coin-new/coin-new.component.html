@@ -1,0 +1,73 @@
+<div class="container mt-4">
+  <h3>Nueva moneda</h3>
+
+  <form class="row needs-validation mt-4" novalidate [formGroup]="newCoin" (ngSubmit)="addCoin()">
+
+
+    <div class="row">
+      <div class="input-field ">
+        <label for="name">Nombre</label>
+        <input id="name" type="text" class="form-control" formControlName="name" />
+      </div>
+      <div class="input-field ">
+        <label for="symbol">Simbolo</label>
+        <input
+          id="symbol" required
+          type="text"
+          class="form-control"
+          formControlName="symbol"
+        />
+        <div class="invalid-feedback">
+          Debe completar este campo.
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <label for="WikiUrl">WikiUrl</label>
+        <input
+          id="WikiUrl"
+          type="text"
+          class="form-control"
+          formControlName="wikiUrl"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <label for="description">Descripcion</label>
+        <input
+          id="description"
+          type="text"
+          class="form-control"
+          formControlName="description"
+        />
+      </div>
+      <div class="container mt-4 mb-4">
+        <span  *ngIf="submited && newCoin.invalid " class="badge bg-danger ">
+
+            Debe completar todos los campos
+          </span>
+      </div>
+      <div class="container">
+
+        <div class="row justify-content-center ">
+          <div class="col-1">
+            <button
+            type="text"
+            class="btn btn-outline-secondary"
+            routerLink="/coins"
+            >
+            Volver
+          </button>
+        </div>
+        <div class="col-1">
+          <button type="submit" class="btn btn-outline-primary">Agregar</button>
+        </div>
+      </div>
+    </div>
+
+    </div>
+  </form>
+</div>

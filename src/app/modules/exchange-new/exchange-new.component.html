@@ -1,0 +1,72 @@
+<div class="container mt-4">
+  <h3>Nuevo exchange</h3>
+
+  <form
+    class="row needs-validation mt-4"
+    novalidate
+    [formGroup]="newExchange"
+    (ngSubmit)="addExchange()"
+  >
+    <div class="row">
+      <div class="input-field">
+        <label for="name">Nombre</label>
+        <input
+          id="name"
+          type="text"
+          class="form-control"
+          formControlName="name"
+        />
+      </div>
+
+      <div class="invalid-feedback">Debe completar este campo.</div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <label for="url">Url</label>
+        <input
+          id="url"
+          type="text"
+          class="form-control"
+          formControlName="url"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="md-textarea">
+        <label for="script">Script</label>
+
+        <textarea
+          id="script"
+          type="text"
+          class="md-textarea form-control"
+          formControlName="script"
+          rows="3"
+        ></textarea>
+      </div>
+      <div class="container mt-4 mb-4">
+        <span *ngIf="submited && newExchange.invalid" class="badge bg-danger">
+          Debe completar todos los campos!
+        </span>
+      </div>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-1">
+            <button
+              type="text"
+              class="btn btn-outline-secondary"
+              routerLink="/exchanges"
+            >
+              Volver
+            </button>
+          </div>
+          <div class="col-1">
+            <button type="submit" class="btn btn-outline-primary">
+              Aceptar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

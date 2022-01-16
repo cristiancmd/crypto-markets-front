@@ -1,0 +1,39 @@
+body > app-root {
+
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+
+
+
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+
+ body {
+  background: #d4c4f7;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #E9E4F0, #a694cf);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #E9E4F0, #D3CCE3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+}
+
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: "Roboto", "Helvetica Neue", "sans-serif"; }
+
+
+.overlay{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(118, 106, 134, 0.6);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,37 @@
+<div class="container mt-4">
+  <h2>Exchanges</h2>
+  <div class="col col-4 mt-4 mb-2">
+    <button type="button" class="btn btn-outline-dark"
+    [routerLink]="['/exchanges/new/', selected]" >Agregar</button>
+  </div>
+  <div class="col col-4 mt-2">
+    <label>Seleccione una criptomoneda</label>
+
+    <select
+      class="form-select mt-2"
+      (change)="onSelectExchange($any($event.target).value)"
+      [(ngModel)]="selected"
+    >
+      <option *ngFor="let coin of coinList" [value]="coin.id">
+        {{ coin.name }}
+      </option>
+    </select>
+  </div>
+</div>
+
+<div *ngFor="let exchange of exchangeList">
+  <hr />
+  <div class="card w-50 mb-4 mt-4">
+    <div class="card-body">
+      <h5 class="card-title"> Nombre: {{ exchange.name }}</h5>
+      <p class="card-text"> Url: {{ exchange.url }}</p>
+      <p class="card-text " >Script:</p>
+        <div class="border border-success ">
+            <samp style="font-size:small"> {{ exchange.script }}</samp>
+        </div>
+       <div class="col mt-4">
+         <a href="#" class="btn btn-primary">Boton</a>
+        </div>
+    </div>
+  </div>
+</div>

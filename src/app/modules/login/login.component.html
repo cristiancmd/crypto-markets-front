@@ -1,0 +1,60 @@
+<div class="container mt-4 col-6">
+  <h3>Login</h3>
+
+  <form
+    class="row needs-validation mt-4"
+    novalidate
+    [formGroup]="credentials"
+    (ngSubmit)="login()"
+  >
+    <div class="row">
+      <div class="input-field">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          type="text"
+          class="form-control"
+          formControlName="username"
+        />
+      </div>
+      <div class="input-field">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          required
+          type="password"
+          class="form-control"
+          formControlName="password"
+        />
+        <div class="invalid-feedback">Debe completar este campo.</div>
+      </div>
+    </div>
+
+    <div class="container mt-4 mb-4">
+      <span *ngIf="submited && credentials.invalid" class="badge bg-danger">
+        Debe completar todos los campos!
+      </span>
+      <span *ngIf="submited && wrongCredentials" class="badge bg-danger">
+        Credenciales invalidas!
+      </span>
+    </div>
+
+    <div class="container">
+
+      <div class="row row-cols-2 justify-content-md-center">
+
+        <div class="col col-3">
+          <button type="text" class=" btn btn-outline-secondary" routerLink="/coins">
+            Volver
+          </button>
+        </div>
+
+        <div class="col col-3">
+
+          <button type="submit" class=" btn btn-outline-primary">Aceptar</button>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>

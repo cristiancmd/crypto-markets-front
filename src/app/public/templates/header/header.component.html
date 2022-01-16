@@ -1,0 +1,33 @@
+
+
+<header class="p-3 bg-dark text-white">
+  <div class="container ">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+
+
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-between  mb-0">
+        <li>
+        </li>
+
+        <li><a routerLink="/coins" class="nav-link px-2 text-white">Coins</a></li>
+        <li><a routerLink="/exchanges" class="nav-link px-2 text-white">Exchanges</a></li>
+        <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+
+
+      </ul>
+      <div class="col col-5" >
+
+        <h5>
+          <button routerLink="/coins" class="btn-1">CryptoMarketsIAW</button>
+        </h5>
+      </div>
+
+
+      <div class="text-end">
+        <button *ngIf="!session" routerLink="/login" type="button" class="btn btn-outline-light me-2">Login</button>
+        <button *ngIf="userName && session" type="button" class="btn btn-outline-light">{{userName}}</button>
+        <button *ngIf="session" (click)="logout()" type="button" class="btn btn-outline-light">LogOut</button>
+      </div>
+    </div>
+  </div>
+</header>
