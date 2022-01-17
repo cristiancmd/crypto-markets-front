@@ -2,10 +2,10 @@
 
 <header class="p-3 bg-dark text-white">
   <div class="container ">
-    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+    <div class="d-flex  justify-content-between align-items-center ">
 
 
-      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-between  mb-0">
+      <ul class="nav ">
         <li>
         </li>
 
@@ -15,7 +15,7 @@
 
 
       </ul>
-      <div class="col col-5" >
+      <div class="p2" >
 
         <h5>
           <button routerLink="/coins" class="btn-1">CryptoMarketsIAW</button>
@@ -23,11 +23,12 @@
       </div>
 
 
-      <div class="text-end">
+      <div class="d-flex flex-row">
         <button *ngIf="!session" routerLink="/login" type="button" class="btn btn-outline-light me-2">Login</button>
-        <button *ngIf="userName && session" type="button" class="btn btn-outline-light">{{userName}}</button>
-        <button *ngIf="session" (click)="logout()" type="button" class="btn btn-outline-light">LogOut</button>
+        <button *ngIf="userName && session" type="button" class="btn btn-outline-light me-2">{{userName}}</button>
+        <button *ngIf="session" (click)="logout()" type="button" class="btn btn-outline-light me-2">LogOut</button>
       </div>
+
     </div>
   </div>
 </header>

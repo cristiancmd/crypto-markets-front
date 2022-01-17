@@ -37,6 +37,17 @@ export class ExchangesComponent implements OnInit {
     });
   }
 
+  deleteExchange(id:string){
+    this._exchangeService.removeExchange(id).subscribe({
+      next: (data:any) => {
+        console.log('eliminado ok ',data);
+        this.ngOnInit();
+      }
+    }
+
+    )
+  }
+
   getCoinList(){
     this._coinService.getCoinList().subscribe({
       next: (data: CoinModel[]) => {
@@ -47,6 +58,11 @@ export class ExchangesComponent implements OnInit {
     });
   }
 
+  clickMethod(name: string) {
+    if(confirm("Desea eliminar este exchange? ")) {
+        this.deleteExchange(name);
+    }
+  }
 
   onSelectExchange(e:string){
 

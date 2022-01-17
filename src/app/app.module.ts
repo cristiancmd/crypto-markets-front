@@ -1,7 +1,7 @@
 import { SpinnerInterceptor } from './public/interceptors/spinner.interceptor';
 import { SpinnerModule } from './public/spinner/spinner.module';
 import { CoinsComponent } from './modules/coins/coins.component';
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -50,6 +50,8 @@ import { LoginComponent } from './modules/login/login.component';
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi:true}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+
 })
 export class AppModule { }

@@ -1,53 +1,56 @@
 <div class="container mt-4">
-<div>
-  <button type="button" class="btn btn-outline-dark" routerLink="/coins/new">Agregar</button>
-</div>
-  <table class="table table-dark table-hover align-middle mt-4 ">
+  <div>
+    <button type="button" class="btn btn-outline-dark" routerLink="/coins/new">
+      Agregar
+    </button>
+  </div>
+
+  <table class="table table-dark table-hover align-middle mt-4">
     <thead class="bg-dark">
+      <!-- <th></th> -->
       <th></th>
       <th>Simbolo</th>
       <th>Nombre</th>
       <th>Precio</th>
       <th></th>
-      <th></th>
+      <!-- <th></th> -->
     </thead>
 
-    <tbody >
-
-      <tr  *ngFor="let coin of coinList">
-
-        <td style=" height: 60px;">
-
-          </td>
+    <tbody>
+      <tr *ngFor="let coin of coinList">
+        <!-- <td>
+          <i class="far fa-star"></i>
+          <i class="fas fa-star"></i>
+        </td> -->
+        <td style="height: 60px"></td>
 
         <td [routerLink]="['/coins/', coin.id]">
-          <img  *ngIf="coin.symbol" src="assets/svg/icon/{{coin.symbol?.toLowerCase()}}.svg"
-          alt="btc" style="width: 25px; height: auto;">
+          <img
+            *ngIf="coin.symbol"
+            src="assets/svg/icon/{{ coin.symbol?.toLowerCase() }}.svg"
+            alt="btc"
+            style="width: 25px; height: auto"
+          />
 
-          <button class="btn-1 "  >
+          <button class="btn-1">
             {{ coin.symbol }}
-
           </button>
-
-
         </td>
-        <td>
-          {{ coin.name }}
+        <td [routerLink]="['/coins/', coin.id]">
+          <button class="btn-1">
+            {{ coin.name }}
+          </button>
         </td>
         <td>
           {{ coin.avgPrice | currency }}
         </td>
         <td>
-          <i (click)="deleteCoin(coin.id!)" class="far fa-trash-alt"></i>
+          <i (click)="clickMethod(coin.id!)" class="far fa-trash-alt"></i>
         </td>
-        <td>
+        <!-- <td>
           <i class="far fa-edit"></i>
-        </td>
+        </td> -->
       </tr>
-
     </tbody>
   </table>
-
 </div>
-
-

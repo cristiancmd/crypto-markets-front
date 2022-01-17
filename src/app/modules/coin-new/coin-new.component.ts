@@ -14,7 +14,7 @@ export class CoinNewComponent implements OnInit {
 
   constructor(
     private form: FormBuilder,
-    private service: CoinService,
+    private _coinSvc: CoinService,
     private router: Router
 
   ) {
@@ -40,7 +40,7 @@ export class CoinNewComponent implements OnInit {
       description: this.newCoin.value.description,
       wikiUrl: this.newCoin.value.wikiUrl
     }
-    this.service.addCoin(coin).subscribe({
+    this._coinSvc.addCoin(coin).subscribe({
       next(data) {
         console.log('Agregado: ', data);
 
@@ -52,4 +52,5 @@ export class CoinNewComponent implements OnInit {
     });
     this.router.navigate(['/coins'])
   }
+
 }

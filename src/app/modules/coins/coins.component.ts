@@ -18,6 +18,16 @@ export class CoinsComponent implements OnInit {
     this.getCoinList();
   }
 
+  ngOnchanges(): void {
+    this.getCoinList();
+  }
+
+  clickMethod(name: string) {
+    if(confirm("Desea eliminar esta moneda? ")) {
+      this.deleteCoin(name);
+    }
+  }
+
   getCoinList(){
     this.service.getCoinList().subscribe({
       next: (data: CoinModel[]) => {

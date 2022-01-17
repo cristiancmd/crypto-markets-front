@@ -30,7 +30,10 @@
             <samp style="font-size:small"> {{ exchange.script }}</samp>
         </div>
        <div class="col mt-4">
-         <a href="#" class="btn btn-primary">Boton</a>
+
+         <button class="btn btn-outline" >
+           <i (click)="clickMethod(exchange.id!)" class="far fa-trash-alt" ></i>
+         </button>
         </div>
     </div>
   </div>
