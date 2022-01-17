@@ -27,7 +27,9 @@ export class LocalStorageService {
     let session = localStorage.getItem("session-data")
     if (session) {
       localStorage.removeItem("session-data");
+      // window.location.reload();
       return true;
+
     }
     return false;
   }

@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { CoinService } from './../../services/coin.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-coin-new',
@@ -11,10 +12,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class CoinNewComponent implements OnInit {
   newCoin: FormGroup;
   submited = false;
-
+  success = false;
   constructor(
     private form: FormBuilder,
     private _coinSvc: CoinService,
+    private toastr: ToastrService,
     private router: Router
 
   ) {
@@ -48,9 +50,18 @@ export class CoinNewComponent implements OnInit {
       },
       error(data) {
         console.log('Error : ', data);
+        return;
+
       }
     });
-    this.router.navigate(['/coins'])
+    this.router.navigate(['/coins']).then(() => {
+
+       this.toastr.success(`Moneda ${this.newCoin.value.name} agregada`);
+   });
+   // window.location.reload();
+    // this.router.navigate(['/coins'])
+    // this.toastr.success(`Moneda ${this.newCoin.value.name} agregada`)
+
   }
 
 }

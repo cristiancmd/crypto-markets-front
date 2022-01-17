@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Credentials } from 'src/app/models/credentials.model';
 import { SecurityService } from 'src/app/services/security.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -14,12 +15,15 @@ export class LoginComponent implements OnInit {
   credentials: FormGroup
   submited = false;
   wrongCredentials = false;
+  private session = false;
 
   constructor(
     private securitySrv: SecurityService,
     private form: FormBuilder,
     private router: Router,
-    private localStorageSvc:LocalStorageService
+    private localStorageSvc:LocalStorageService,
+    private toastr: ToastrService,
+
   ) {
     this.credentials = this.form.group({
         username: ['', Validators.required],
@@ -32,6 +36,12 @@ export class LoginComponent implements OnInit {
 
   }
 
+  getSession():boolean {
+    if(this.session){
+      return true;
+    }
+    return false;
+  }
 
   login() {
 
@@ -56,6 +66,8 @@ export class LoginComponent implements OnInit {
           this.localStorageSvc.saveSessionData(data);
           this.securitySrv.isActiveSession();
           this.router.navigate(['/coins']);
+          this.toastr.info(`Bienvenido ${this.credentials.value.username}`)
+          this.session = true;
         }
         },
         error: (e: any) => { console.log(e) }

@@ -1,3 +1,4 @@
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -14,7 +15,8 @@ export class SecurityService {
 
   url:string = environment.API_URL;
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private toastr: ToastrService
   ) {
 
     this.isActiveSession();

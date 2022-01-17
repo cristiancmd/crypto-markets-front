@@ -1,6 +1,6 @@
 <div class="container mt-4">
   <div>
-    <button type="button" class="btn btn-outline-dark" routerLink="/coins/new">
+    <button *ngIf="isSession()" type="button" class="btn btn-outline-dark" routerLink="/coins/new">
       Agregar
     </button>
   </div>
@@ -45,7 +45,7 @@
           {{ coin.avgPrice | currency }}
         </td>
         <td>
-          <i (click)="clickMethod(coin.id!)" class="far fa-trash-alt"></i>
+          <i *ngIf="isSession()" (click)="clickMethod(coin.id!)" class="far fa-trash-alt"></i>
         </td>
         <!-- <td>
           <i class="far fa-edit"></i>

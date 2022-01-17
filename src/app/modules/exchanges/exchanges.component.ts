@@ -3,6 +3,7 @@ import { ExchangeModel } from './../../models/exchange.model';
 import { Component, OnInit } from '@angular/core';
 import { ExchangeService } from 'src/app/services/exchange.service';
 import { CoinModel } from 'src/app/models/coin.model';
+import { SecurityService } from 'src/app/services/security.service';
 
 @Component({
   selector: 'app-exchanges',
@@ -17,7 +18,8 @@ export class ExchangesComponent implements OnInit {
 
   constructor(
     private _exchangeService: ExchangeService,
-    private _coinService: CoinService
+    private _coinService: CoinService,
+    private security: SecurityService
   ) { }
 
   ngOnInit(): void {
@@ -25,6 +27,10 @@ export class ExchangesComponent implements OnInit {
     this.getCoinList();
 
 
+  }
+
+  isSession():boolean {
+    return this.security.isActiveSession();
   }
 
   getExchangeList(){

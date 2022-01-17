@@ -2,6 +2,7 @@ import { ExchangeService } from 'src/app/services/exchange.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-exchange-new',
@@ -18,7 +19,9 @@ export class ExchangeNewComponent implements OnInit {
     private form: FormBuilder,
     private exchangeSvc: ExchangeService,
     private router: Router,
-    private aRoute: ActivatedRoute
+    private aRoute: ActivatedRoute,
+    private toastr: ToastrService
+
 
   ) {
 
@@ -50,17 +53,18 @@ export class ExchangeNewComponent implements OnInit {
     this.exchangeSvc.addExchange(exch).subscribe({
       next(data) {
         console.log('Agregado: ', data);
+
       },
       error(data) {
         console.log('Error : ', data);
       }
     });
     // this.router.navigate(['/exchanges'])
-
+    this.toastr.success('Exchange agregado');
     this.router.navigate(['/exchanges'])
    .then(() => {
-      window.location.reload();
-   });
+      // window.location.reload();
+   })
   }
 
   ngOnChanges() {

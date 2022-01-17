@@ -1,3 +1,4 @@
+
 import { LoginComponent } from './modules/login/login.component';
 import { ExchangeNewComponent } from './modules/exchange-new/exchange-new.component';
 import { ChartComponent } from './modules/chart/chart.component';
@@ -7,6 +8,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CoinDetailComponent } from './modules/coin-detail/coin-detail.component';
 import { CoinsComponent } from './modules/coins/coins.component';
+import { AboutComponent } from './modules/about/about.component';
 
 const routes: Routes = [
 
@@ -26,7 +28,8 @@ const routes: Routes = [
   { path: 'chart', component: ChartComponent },
   { path: 'exchanges', component: ExchangesComponent },
   { path: 'exchanges/new/:id', component: ExchangeNewComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'about', component: AboutComponent },
 
 ];
 

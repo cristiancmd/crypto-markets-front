@@ -20,6 +20,9 @@ import { ChartComponent } from './modules/chart/chart.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './modules/login/login.component';
+import { CommonModule } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
+import { AboutComponent } from './modules/about/about.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,7 @@ import { LoginComponent } from './modules/login/login.component';
     ExchangesComponent,
     ChartComponent,
     LoginComponent,
+    AboutComponent,
 
   ],
   imports: [
@@ -44,7 +48,8 @@ import { LoginComponent } from './modules/login/login.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    SpinnerModule
+    SpinnerModule,
+    ToastrModule.forRoot(),
 
   ],
   providers: [

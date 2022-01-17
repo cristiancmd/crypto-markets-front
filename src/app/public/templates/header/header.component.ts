@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { LocalStorageService } from './../../../services/local-storage.service';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -18,6 +19,7 @@ export class HeaderComponent implements OnInit {
     private localStorageSvc: LocalStorageService,
     private router: Router,
     private aRoute: ActivatedRoute,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -38,9 +40,11 @@ export class HeaderComponent implements OnInit {
 
     if(this.localStorageSvc.removeSessionData()){
       console.log('sesion cerrada..')
-      this.router.navigate(['/coins']);
+      // this.router.navigate(['/coins']);
       this.ngOnInit();
       this.session = false;
+      this.toastr.info('Session cerrada')
+
 
 
     }
