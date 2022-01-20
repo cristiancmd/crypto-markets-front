@@ -25,9 +25,10 @@
 
 
       <div class="d-flex flex-row">
-        <button *ngIf="!session" routerLink="/login" type="button" class="btn btn-outline-light me-2">Login</button>
-        <button *ngIf="userName && session" type="button" class="btn btn-outline-light me-2">{{userName}}</button>
-        <button *ngIf="session" (click)="logout()" type="button" class="btn btn-outline-light me-2">LogOut</button>
+
+        <ngx-avatar class="me-3" size="50" [name]="userName"></ngx-avatar>
+        <button *ngIf="!(auth.isAuthenticated$ | async)" class="btn btn-outline-light me-2" (click)="login()">Login</button>
+        <button *ngIf="(auth.isAuthenticated$ | async)"class="btn btn-outline-light me-2" (click)="logout()">Logout</button>
       </div>
 
     </div>

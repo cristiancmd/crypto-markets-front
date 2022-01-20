@@ -1,3 +1,4 @@
+import { AuthService } from '@auth0/auth0-angular';
 import { CoinService } from './../../services/coin.service';
 import { ExchangeModel } from './../../models/exchange.model';
 import { Component, OnInit } from '@angular/core';
@@ -19,7 +20,8 @@ export class ExchangesComponent implements OnInit {
   constructor(
     private _exchangeService: ExchangeService,
     private _coinService: CoinService,
-    private security: SecurityService
+    private security: SecurityService,
+    public auth: AuthService
   ) { }
 
   ngOnInit(): void {

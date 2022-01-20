@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CoinModel } from 'src/app/models/coin.model';
 import { ToastrService } from 'ngx-toastr';
 import { SecurityService } from 'src/app/services/security.service';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-coins',
@@ -15,19 +16,20 @@ export class CoinsComponent implements OnInit {
   constructor(
     private service: CoinService,
     private toastr: ToastrService,
-    private security: SecurityService
+    private security: SecurityService,
+    public auth: AuthService
   ) { }
 
   ngOnInit(): void {
     this.getCoinList();
 
-      console.log(this.security.isActiveSession())
+
   }
 
 
   ngOnchanges(): void {
     this.getCoinList();
-    console.log(this.security.isActiveSession())
+
   }
 
   isSession():boolean {

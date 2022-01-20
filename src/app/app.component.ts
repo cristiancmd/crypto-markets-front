@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-root',
@@ -7,13 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'crypto-markets';
+  title = 'Crypto Markets IAW';
 
-    constructor(private http: HttpClient){}
+
+
+    constructor(private http: HttpClient,
+      public auth: AuthService,
+      ){
+
+
+      }
 
     ngOnInit(){
-      console.log('hola')
+
     }
+
 
 
 

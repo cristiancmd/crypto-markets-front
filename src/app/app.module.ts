@@ -23,6 +23,8 @@ import { LoginComponent } from './modules/login/login.component';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { AboutComponent } from './modules/about/about.component';
+import { AuthModule } from '@auth0/auth0-angular';
+import { AvatarModule } from 'ngx-avatar';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,14 @@ import { AboutComponent } from './modules/about/about.component';
     BrowserAnimationsModule,
     SpinnerModule,
     ToastrModule.forRoot(),
+    AuthModule.forRoot({
+      domain: 'dev-nq15j8cp.us.auth0.com',
+      clientId: '3BAudvlOWVBvtgiPXgIblLhtzORKZ6T8',
+      cacheLocation: 'localstorage',
+      useRefreshTokens: true,
+
+    }),
+    AvatarModule,
 
   ],
   providers: [

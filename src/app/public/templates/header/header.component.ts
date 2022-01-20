@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SecurityService } from 'src/app/services/security.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  session:boolean= false;
+  session: boolean = false;
   suscription: Subscription = new Subscription;
   userName?: string;
   constructor(
@@ -19,36 +20,44 @@ export class HeaderComponent implements OnInit {
     private localStorageSvc: LocalStorageService,
     private router: Router,
     private aRoute: ActivatedRoute,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public auth: AuthService,
   ) { }
 
   ngOnInit(): void {
 
+    this.auth.user$.subscribe(data => {
+      console.log(data)
+      this.userName = data?.name
+    })
 
-      this.suscription = this.securitySvc.getSessionStatus().subscribe(
-        {
-          next: (data: any) => {this.session = data.isLogged
-          this.userName= data.name;
-         },
-          error: (e) => { console.error(e)}
+
+    this.auth.isAuthenticated$.subscribe(
+      {
+        next: (data) => {
+          console.log('auth  ', data)
+          if (data) {
+            this.toastr.info('Sesion iniciada')
+          }
         }
-      )
+
+      })
+
+
 
   }
 
-  logout(){
+  login() {
+    this.auth.loginWithRedirect();
 
-    if(this.localStorageSvc.removeSessionData()){
-      console.log('sesion cerrada..')
-      // this.router.navigate(['/coins']);
-      this.ngOnInit();
-      this.session = false;
-      this.toastr.info('Session cerrada')
-
-
-
-    }
   }
+
+  logout() {
+    this.auth.logout();
+    this.toastr.info('Sesion cerrada')
+
+  }
+
 
 
 }
