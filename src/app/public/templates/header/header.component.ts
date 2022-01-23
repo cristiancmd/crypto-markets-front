@@ -53,7 +53,8 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.auth.logout();
+    // this.auth.logout();
+    this.auth.logout({ returnTo: window.location.origin });
     this.toastr.info('Sesion cerrada')
 
   }
