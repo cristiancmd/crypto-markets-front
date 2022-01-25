@@ -1,21 +1,23 @@
+
 import { FavCoinsService } from './../../services/fav-coins.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { CoinService } from './../../services/coin.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CoinModel } from 'src/app/models/coin.model';
 import { ToastrService } from 'ngx-toastr';
 import { SecurityService } from 'src/app/services/security.service';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
-  selector: 'app-coins',
-  templateUrl: './coins.component.html',
-  styleUrls: ['./coins.component.css']
+  selector: 'app-my-coins',
+  templateUrl: './my-coins.component.html',
+  styleUrls: ['./my-coins.component.css']
 })
-export class CoinsComponent implements OnInit {
+export class MyCoinsComponent implements OnInit, OnDestroy {
 
   coinList: CoinModel[] = [];
-  public favList: CoinModel[] = [];
+  public favList:CoinModel[] = [];
+  suscription?:Subscription;
 
   @Input() mycoins?:string;
 
@@ -30,10 +32,16 @@ export class CoinsComponent implements OnInit {
   ngOnInit(): void {
     this.getCoinList();
     this.favList = this.favcoins$.obtenerCoins();
-    console.log('coinlist : ', this.favList)
+
+    // this.suscription = this.service.refresh.subscribe( ()=> {
+    //   this.favList = this.favcoins$.obtenerCoins();
+    // } )
 
   }
 
+  ngOnDestroy():void{
+    this.suscription?.unsubscribe();
+  }
 
 
   includesCoin(coin: CoinModel): boolean {
@@ -44,7 +52,8 @@ export class CoinsComponent implements OnInit {
     if (coin && this.includesCoin(coin)) {
       // this.removeItem(this.favList, coin);
       this.favList = this.favList.filter(c => c.id != coin.id);
-      this.toastr.success(`Moneda: ${coin.name} quitada de favoritas`)
+      this.toastr.success(`Moneda: ${coin.name} quitada de favoritas`);
+
     } else
       if (coin) {this.favList.push(coin)
         this.toastr.success(`Moneda: ${coin.name} agregada a favoritas`)
@@ -62,36 +71,21 @@ export class CoinsComponent implements OnInit {
     return this.security.isActiveSession();
   }
 
-  clickMethod(name: string) {
-    if (confirm("Desea eliminar esta moneda? ")) {
-      this.deleteCoin(name);
 
-    }
-  }
-
+// getCoinList(){
+//   this.coinList=this.favcoins$.obtenerCoins();
+// }
   getCoinList() {
     this.service.getCoinList().subscribe({
       next: (data: CoinModel[]) => {
-        this.coinList = data;
+        this.coinList = data
+        this.coinList = this.coinList.filter(c => this.favList.map(f => f.id).includes(c.id) );
+        console.log(this.coinList);
 
       }
     });
   }
 
-  deleteCoin(id: string) {
-    this.service.removeCoin(id).subscribe({
-      next: (data: any) => {
-        console.log('eliminado ok', data);
-        let coin = this.favList.find(c => c.id==id);
-        // this.removeItem(this.favList, coin! );
-        this.favList = this.favList.filter(c => c.id != coin?.id)
-        this.favcoins$.setCoins(this.favList);
-        this.ngOnInit();
-        this.toastr.success('Moneda eliminada')
-      }
-    }
 
-    )
-  }
 
 }

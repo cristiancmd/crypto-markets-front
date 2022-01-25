@@ -35,14 +35,24 @@
     <div class="row">
       <div class="md-textarea">
         <label for="script">Script</label>
-
-        <textarea
+        <ngx-codemirror
+        [(ngModel)]= "javascriptinitvar"
+          [options]="{
+            lineNumbers: true,
+            theme: 'material',
+            mode: 'javascript'
+          }"
+          formControlName="script"
+          type="text"
+          id="script"
+        ></ngx-codemirror>
+        <!-- <textarea
           id="script"
           type="text"
           class="md-textarea form-control"
           formControlName="script"
           rows="3"
-        ></textarea>
+        ></textarea> -->
       </div>
       <div class="container mt-4 mb-4">
         <span *ngIf="submited && newExchange.invalid" class="badge bg-danger">

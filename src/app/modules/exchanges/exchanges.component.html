@@ -19,16 +19,31 @@
   </div>
 </div>
 
+
+
+
 <div *ngFor="let exchange of exchangeList">
   <hr />
-  <div class="card w-50 mb-4 mt-4">
+
+  <div class="card  mb-4 mt-4" style="background-color: rgb(194, 180, 216)">
     <div class="card-body">
       <h5 class="card-title"> Nombre: {{ exchange.name }}</h5>
       <p class="card-text"> Url: {{ exchange.url }}</p>
       <p class="card-text " >Script:</p>
-        <div class="border border-success ">
-            <samp style="font-size:small"> {{ exchange.script }}</samp>
-        </div>
+
+        <ngx-codemirror
+        [(ngModel)]=" exchange.script "
+          [options]="{
+            lineNumbers: true,
+            theme: 'material',
+            mode: 'javascript',
+            readOnly:true
+
+
+
+          }"
+
+        ></ngx-codemirror>
        <div class="col mt-4">
 
          <button class="btn btn-outline" >

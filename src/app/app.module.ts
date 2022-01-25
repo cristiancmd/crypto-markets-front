@@ -25,7 +25,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { AboutComponent } from './modules/about/about.component';
 import { AuthHttpInterceptor, AuthModule } from '@auth0/auth0-angular';
 import { AvatarModule } from 'ngx-avatar';
-
+import { CodemirrorModule } from '@ctrl/ngx-codemirror';
+import { MyCoinsComponent } from './modules/my-coins/my-coins.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +42,7 @@ import { AvatarModule } from 'ngx-avatar';
     ChartComponent,
     LoginComponent,
     AboutComponent,
+    MyCoinsComponent,
 
   ],
   imports: [
@@ -77,6 +79,7 @@ import { AvatarModule } from 'ngx-avatar';
 
     }),
     AvatarModule,
+    CodemirrorModule,
 
   ],
   providers: [

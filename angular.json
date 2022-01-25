@@ -17,6 +17,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+
+          "allowedCommonJsDependencies": [  "rxjs-compat","codemirror/mode/javascript/javascript" ],
             "outputPath": "dist/crypto-markets",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -35,7 +37,9 @@
             "styles": [
               "src/styles.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/ngx-toastr/toastr.css"
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/codemirror/lib/codemirror.css",
+              "node_modules/codemirror/theme/material.css"
 
 
             ],

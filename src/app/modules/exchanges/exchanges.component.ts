@@ -12,7 +12,7 @@ import { SecurityService } from 'src/app/services/security.service';
   styleUrls: ['./exchanges.component.css']
 })
 export class ExchangesComponent implements OnInit {
-  coinId?:string = '61ad3d9e35ce236717d7f5e7'
+  coinId?:string ;
   selected?:string;
   exchangeList: ExchangeModel[] = [];
   coinList: CoinModel[] = [];
@@ -25,10 +25,7 @@ export class ExchangesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getExchangeList();
     this.getCoinList();
-
-
   }
 
   isSession():boolean {
@@ -40,7 +37,7 @@ export class ExchangesComponent implements OnInit {
       this._exchangeService.getExchangeListFor(this.coinId).subscribe({
         next: (data: ExchangeModel[]) => {
           this.exchangeList = data;
-          console.log(this.exchangeList)
+
         }
     });
   }
@@ -62,6 +59,7 @@ export class ExchangesComponent implements OnInit {
         this.coinList = data;
         this.selected = this.coinList[0].id
         this.coinId = this.selected
+        this.getExchangeList();
       }
     });
   }
@@ -76,7 +74,7 @@ export class ExchangesComponent implements OnInit {
 
     if (this.selected) {
       this.coinId = e;
-      console.log(this.selected);
+
       this.getExchangeList();
 
     }

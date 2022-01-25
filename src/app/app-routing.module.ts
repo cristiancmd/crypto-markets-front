@@ -9,6 +9,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CoinDetailComponent } from './modules/coin-detail/coin-detail.component';
 import { CoinsComponent } from './modules/coins/coins.component';
 import { AboutComponent } from './modules/about/about.component';
+import { MyCoinsComponent } from './modules/my-coins/my-coins.component';
 
 const routes: Routes = [
 
@@ -25,9 +26,10 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   { path: 'exchanges', component: ExchangesComponent },
-  { path: 'chart', component: ChartComponent },
+  // { path: 'chart', component: ChartComponent },
   { path: 'exchanges', component: ExchangesComponent },
   { path: 'exchanges/new/:id', component: ExchangeNewComponent },
+  { path: 'mycoins', component: MyCoinsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'about', component: AboutComponent },
 

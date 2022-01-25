@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+// import 'codemirror/mode/javascript/javascript';
 
 @Component({
   selector: 'app-exchange-new',
@@ -14,6 +15,7 @@ export class ExchangeNewComponent implements OnInit {
   newExchange: FormGroup;
   submited = false;
   id: string | null;
+  public javascriptinitvar:string = "var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest; \n //escriba su script de obtención de precio aqui"
 
   constructor(
     private form: FormBuilder,
