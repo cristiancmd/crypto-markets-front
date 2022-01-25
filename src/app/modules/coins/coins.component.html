@@ -1,19 +1,23 @@
 <div class="container mt-4">
   <div>
-    <button *ngIf="(auth.isAuthenticated$ | async)" type="button" class="btn btn-outline-dark" routerLink="/coins/new">
+    <button
+      *ngIf="auth.isAuthenticated$ | async"
+      type="button"
+      class="btn btn-outline-dark"
+      routerLink="/coins/new"
+    >
       Agregar
     </button>
   </div>
 
   <table class="table table-dark table-hover align-middle mt-4">
-    <thead class="bg-dark">
-      <!-- <th></th> -->
+    <thead class="bg-dark ">
       <th></th>
+      <th><i class="far fa-star"></i></th>
       <th>Simbolo</th>
-      <th>Nombre</th>
+      <th class="text-start">Nombre</th>
       <th>Precio</th>
       <th></th>
-      <!-- <th></th> -->
     </thead>
 
     <tbody>
@@ -22,13 +26,27 @@
           <i class="far fa-star"></i>
           <i class="fas fa-star"></i>
         </td> -->
-        <td style="height: 60px"></td>
+        <td ></td>
+        <td style="height: 60px">
+          <div class="page__toggle">
+            <label class="toggle">
+              <input
+                class="toggle__input"
+                type="checkbox"
+                (change)="favoriteCoin(coin)"
+                [checked]="includesCoin(coin)"
+              />
 
+              <span class="toggle__label"> </span>
+            </label>
+          </div>
+        </td>
+        <!-- <td style="height: 60px"></td> -->
         <td [routerLink]="['/coins/', coin.id]">
           <img
             *ngIf="coin.symbol"
             src="assets/svg/icon/{{ coin.symbol?.toLowerCase() }}.svg"
-            alt="btc"
+            alt="coin"
             style="width: 25px; height: auto"
           />
 
@@ -36,16 +54,23 @@
             {{ coin.symbol }}
           </button>
         </td>
-        <td [routerLink]="['/coins/', coin.id]">
+        <td class="text-start" [routerLink]="['/coins/', coin.id]">
           <button class="btn-1">
             {{ coin.name }}
           </button>
         </td>
-        <td>
+        <td  class="text-start  ">
           {{ coin.avgPrice | currency }}
         </td>
-        <td>
-          <i *ngIf="(auth.isAuthenticated$ | async)" (click)="clickMethod(coin.id!)" class="far fa-trash-alt"></i>
+        <td >
+          <button class="btn-1" >
+
+            <i
+            *ngIf="auth.isAuthenticated$ | async"
+            (click)="clickMethod(coin.id!)"
+            class="far fa-trash-alt"
+            ></i>
+          </button>
         </td>
         <!-- <td>
           <i class="far fa-edit"></i>

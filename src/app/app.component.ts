@@ -12,16 +12,16 @@ export class AppComponent implements OnInit {
 
 
 
-    constructor(private http: HttpClient,
-      public auth: AuthService,
-      ){
+  constructor(private http: HttpClient,
+    public auth: AuthService,
+  ) {
 
 
-      }
+  }
 
-    ngOnInit(){
+  ngOnInit() {
 
-    }
+  }
 
 
 

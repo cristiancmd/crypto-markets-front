@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
 
     this.auth.user$.subscribe(data => {
-      console.log(data)
+      // console.log(data)
       this.userName = data?.name
     })
 
