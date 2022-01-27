@@ -4,3 +4,15 @@
   box-shadow: none;
   color: aliceblue;
 }
+
+
+
+.nav-link {
+  color: rgb(233, 230, 230);
+
+}
+
+.nav-link:hover {
+  color: rgb(200, 174, 255);
+
+}

@@ -13,10 +13,7 @@
       <div class="row"></div>
 
       <div class="row mt-2 mb-2">
-        <h2 >
-
-
-        </h2>
+        <h2></h2>
         <h2>
           <img
             *ngIf="coin.symbol"
@@ -40,36 +37,40 @@
           <h2 class="text-end">{{ coin.avgPrice | currency }}</h2>
         </div>
         <div class="col-4 text-right">
-          <h6 >{{ coin.description }}</h6>
+          <h6>{{ coin.description }}</h6>
         </div>
       </div>
     </div>
     <div class="row align-items-start mt-4 mb-4">
       <div class="col">
         <label>Seleccione exchange</label>
-
-        <select
-          class="form-select"
-          (change)="onSelectExchange($any($event.target).value)"
+        <ng-select
           [(ngModel)]="selected"
+          (ngModelChange)="onSelectExchange($event)"
+          [searchable]="false"
+          [clearable]="false"
         >
-          <option *ngFor="let exchange of exchanges" [value]="exchange.id">
+          <ng-option *ngFor="let exchange of exchanges" [value]="exchange.id">
             {{ exchange.name }}
-          </option>
-        </select>
+          </ng-option>
+        </ng-select>
+
+
       </div>
       <div class="col">
         <label>Seleccione rango</label>
-
-        <select
-          class="form-select"
-          (change)="onSelectRange($any($event.target).value)"
+        <ng-select
           [(ngModel)]="last"
+          (ngModelChange)="onSelectRange($event)"
+          [searchable]="false"
+          [clearable]="false"
         >
-          <option *ngFor="let range of ranges" [value]="range.value">
+          <ng-option *ngFor="let range of ranges" [value]="range.value">
             {{ range.name }}
-          </option>
-        </select>
+          </ng-option>
+        </ng-select>
+
+
       </div>
     </div>
   </div>
@@ -77,8 +78,6 @@
   <div class="row" *ngIf="prices.length > 0 && exchanges.length > 0">
     <h5>Grafico</h5>
 
-      <app-chart [datos]="prices"></app-chart>
-
-
+    <app-chart [datos]="prices"></app-chart>
   </div>
 </div>

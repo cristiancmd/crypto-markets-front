@@ -1,8 +1,7 @@
 <div class="container mt-4">
-
   <h2>Mis Monedas</h2>
   <table class="table table-dark table-hover align-middle mt-4">
-    <thead class="bg-dark ">
+    <thead class="bg-dark">
       <th></th>
       <th><i class="far fa-star"></i></th>
       <th>Simbolo</th>
@@ -17,15 +16,15 @@
           <i class="far fa-star"></i>
           <i class="fas fa-star"></i>
         </td> -->
-        <td ></td>
+        <td></td>
         <td style="height: 60px">
           <div class="page__toggle">
-            <label class="toggle">
+            <label class="toggle" placement="left"
+            [ngbTooltip]="includesCoin(coin) ? 'Quitar de favoritas' : 'Agregar a favoritas'">
               <input
                 class="toggle__input"
                 type="checkbox"
                 (change)="favoriteCoin(coin)"
-
                 [checked]="includesCoin(coin)"
               />
 
@@ -51,11 +50,13 @@
             {{ coin.name }}
           </button>
         </td>
-        <td  class="text-start  ">
+        <td class="text-start">
           {{ coin.avgPrice | currency }}
         </td>
-        <td >
-            <button class="btn btn-outline-light">Notificar</button>
+        <td>
+          <button class="btn btn-outline-light" placement="bottom"
+          ngbTooltip="Agregar alertas de maximos o minimos">
+          Alertas</button>
         </td>
         <!-- <td>
           <i class="far fa-edit"></i>
@@ -63,4 +64,42 @@
       </tr>
     </tbody>
   </table>
+
+  <div>
+    <!--Using ng-option and for loop-->
+    <ng-select [(ngModel)]="selectedCar">
+      <ng-option *ngFor="let car of cars" [value]="car.id">{{
+        car.name
+      }}</ng-option>
+    </ng-select>
+
+    <!--Using items input-->
+    <ng-select
+      [items]="cars"
+      bindLabel="name"
+      bindValue="id"
+      [(ngModel)]="selectedCar"
+    >
+    </ng-select>
+  </div>
+
+  <!--template para modal-->
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Modal title</h4>
+      <button type="button" class="btn btn-light" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>One fine body&hellip;</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>
+
+    <!--Boton del modal-->
+  <button class="btn btn-outline-primary mb-2 mr-2" (click)="openVerticallyCentered(content)">Modal vertically centered</button>
+
 </div>

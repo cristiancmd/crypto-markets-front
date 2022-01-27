@@ -1,6 +1,6 @@
 
 
-<header class="p-3 bg-dark text-white">
+<header class="p-3 bg-dark ">
   <div class="container ">
     <div class="d-flex  justify-content-between align-items-center ">
 
@@ -9,11 +9,11 @@
         <li>
         </li>
 
-        <li><a routerLink="/coins" class="nav-link px-2 text-white">Coins</a></li>
-        <li><a routerLink="/exchanges" class="nav-link px-2 text-white">Exchanges</a></li>
-        <li *ngIf="(auth.isAuthenticated$ | async)"><a routerLink="/mycoins" class="nav-link px-2 text-white">MisCoins</a></li>
+        <li><a routerLink="/coins" class="nav-link px-2 ">Coins</a></li>
+        <li><a routerLink="/exchanges" class="nav-link px-2 ">Exchanges</a></li>
+        <li *ngIf="(auth.isAuthenticated$ | async)"><a routerLink="/mycoins" class="nav-link px-2">MisCoins</a></li>
 
-        <li><a routerLink="/about" class="nav-link px-2 text-white">About</a></li>
+        <li><a routerLink="/about" class="nav-link px-2 ">About</a></li>
 
 
       </ul>

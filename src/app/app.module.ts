@@ -27,6 +27,9 @@ import { AuthHttpInterceptor, AuthModule } from '@auth0/auth0-angular';
 import { AvatarModule } from 'ngx-avatar';
 import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 import { MyCoinsComponent } from './modules/my-coins/my-coins.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgSelectModule } from '@ng-select/ng-select';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,6 +83,9 @@ import { MyCoinsComponent } from './modules/my-coins/my-coins.component';
     }),
     AvatarModule,
     CodemirrorModule,
+    NgbModule,
+    NgSelectModule,
+
 
   ],
   providers: [

@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { ExchangeService } from 'src/app/services/exchange.service';
 import { CoinModel } from 'src/app/models/coin.model';
 import { SecurityService } from 'src/app/services/security.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-exchanges',
@@ -21,7 +22,8 @@ export class ExchangesComponent implements OnInit {
     private _exchangeService: ExchangeService,
     private _coinService: CoinService,
     private security: SecurityService,
-    public auth: AuthService
+    public auth: AuthService,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -79,4 +81,10 @@ export class ExchangesComponent implements OnInit {
 
     }
   }
+
+  openVerticallyCentered(content:any) {
+    this.modalService.open(content, { centered: true });
+  }
+
+
 }

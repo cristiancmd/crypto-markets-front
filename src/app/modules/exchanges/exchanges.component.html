@@ -1,55 +1,56 @@
 <div class="container mt-4">
   <h2>Exchanges</h2>
   <div class="col col-4 mt-4 mb-2">
-    <button *ngIf="(auth.isAuthenticated$ | async)" type="button" class="btn btn-outline-dark"
-    [routerLink]="['/exchanges/new/', selected]" >Agregar</button>
+    <button
+      *ngIf="auth.isAuthenticated$ | async"
+      type="button"
+      class="btn btn-outline-dark"
+      [routerLink]="['/exchanges/new/', selected]"
+    >
+      Agregar
+    </button>
   </div>
   <div class="col col-4 mt-2">
     <label>Seleccione una criptomoneda</label>
 
-    <select
-      class="form-select mt-2"
-      (change)="onSelectExchange($any($event.target).value)"
+    <ng-select
       [(ngModel)]="selected"
+      (ngModelChange)="onSelectExchange($event)"
     >
-      <option *ngFor="let coin of coinList" [value]="coin.id">
+      <ng-option *ngFor="let coin of coinList" [value]="coin.id">
         {{ coin.name }}
-      </option>
-    </select>
+      </ng-option>
+    </ng-select>
   </div>
 </div>
-
-
-
 
 <div *ngFor="let exchange of exchangeList">
   <hr />
 
-  <div class="card  mb-4 mt-4" style="background-color: rgb(194, 180, 216)">
+  <div class="card mb-4 mt-4" style="background-color: rgb(194, 180, 216)">
     <div class="card-body">
-      <h5 class="card-title"> Nombre: {{ exchange.name }}</h5>
-      <p class="card-text"> Url: {{ exchange.url }}</p>
-      <p class="card-text " >Script:</p>
+      <h5 class="card-title">Nombre: {{ exchange.name }}</h5>
+      <p class="card-text">Url: {{ exchange.url }}</p>
+      <p class="card-text">Script:</p>
 
-        <ngx-codemirror
-        [(ngModel)]=" exchange.script "
-          [options]="{
-            lineNumbers: true,
-            theme: 'material',
-            mode: 'javascript',
-            readOnly:true
-
-
-
-          }"
-
-        ></ngx-codemirror>
-       <div class="col mt-4">
-
-         <button class="btn btn-outline" >
-           <i *ngIf="(auth.isAuthenticated$ | async)" (click)="clickMethod(exchange.id!)" class="far fa-trash-alt" ></i>
-         </button>
-        </div>
+      <ngx-codemirror
+        [(ngModel)]="exchange.script"
+        [options]="{
+          lineNumbers: true,
+          theme: 'material',
+          mode: 'javascript',
+          readOnly: true
+        }"
+      ></ngx-codemirror>
+      <div class="col mt-4">
+        <button class="btn btn-outline">
+          <i
+            *ngIf="auth.isAuthenticated$ | async"
+            (click)="clickMethod(exchange.id!)"
+            class="far fa-trash-alt"
+          ></i>
+        </button>
+      </div>
     </div>
   </div>
 </div>

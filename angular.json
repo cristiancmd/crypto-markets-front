@@ -39,7 +39,9 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/ngx-toastr/toastr.css",
               "node_modules/codemirror/lib/codemirror.css",
-              "node_modules/codemirror/theme/material.css"
+              "node_modules/codemirror/theme/material.css",
+               "node_modules/@ng-select/ng-select/themes/material.theme.css"
+
 
 
             ],

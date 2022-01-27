@@ -29,7 +29,9 @@
         <td ></td>
         <td style="height: 60px">
           <div class="page__toggle">
-            <label class="toggle">
+
+              <label class="toggle" placement="bottom" [ngbTooltip]="includesCoin(coin) ? 'Quitar de favoritas' : 'Agregar a favoritas'">
+
               <input
                 class="toggle__input"
                 type="checkbox"
