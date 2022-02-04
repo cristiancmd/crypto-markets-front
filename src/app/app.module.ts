@@ -1,3 +1,4 @@
+import { NgbdModalContent } from './modules/my-coins/modal/modal-active-alert.component';
 import { SpinnerInterceptor } from './public/interceptors/spinner.interceptor';
 import { SpinnerModule } from './public/spinner/spinner.module';
 import { CoinsComponent } from './modules/coins/coins.component';
@@ -29,6 +30,8 @@ import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 import { MyCoinsComponent } from './modules/my-coins/my-coins.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ModalComponent } from './modules/my-coins/modal/modal.component';
+import { ProfileComponent } from './modules/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +49,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
     LoginComponent,
     AboutComponent,
     MyCoinsComponent,
+    ModalComponent,
+    NgbdModalContent,
+    ProfileComponent
 
   ],
   imports: [

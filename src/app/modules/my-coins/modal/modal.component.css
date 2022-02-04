@@ -1,0 +1,12 @@
+.modal-body , .modal-header , .modal-footer, .input-group, .ng-select {
+  background-color: #515557;
+  color: white;
+}
+.dark-modal .close {
+  color: white;
+}
+.light-blue-backdrop {
+  background-color: #5cb3fd;
+}
+
+

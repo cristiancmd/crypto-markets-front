@@ -1,15 +1,19 @@
+import { SpinnerService } from './../../services/spinner.service';
+import { UserCoinModel } from './../../models/usercoin.model';
+import { ModalComponent } from './modal/modal.component';
 import { UserModel } from './../../models/user.model';
 import { UserService } from './../../services/user.service';
 
 import { FavCoinsService } from './../../services/fav-coins.service';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, pipe, Subscription } from 'rxjs';
 import { CoinService } from './../../services/coin.service';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, Pipe, SimpleChanges, TemplateRef, ViewChild } from '@angular/core';
 import { CoinModel } from 'src/app/models/coin.model';
 import { ToastrService } from 'ngx-toastr';
 import { SecurityService } from 'src/app/services/security.service';
 import { AuthService } from '@auth0/auth0-angular';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbdModalContent } from './modal/modal-active-alert.component';
 
 @Component({
   selector: 'app-my-coins',
@@ -19,13 +23,22 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class MyCoinsComponent implements OnInit, OnDestroy {
 
   coinList: CoinModel[] = [];
-  public favList:CoinModel[] = [];
-  suscription?:Subscription;
+  public favList: CoinModel[] = [];
+  suscription?: Subscription;
+  alertCoinList: UserCoinModel[]=[];
+  loading=true;
 
-  @Input() mycoins?:string;
+  @Input() mycoins?: string;
+  @ViewChild('content')
+  content!: ElementRef;
+
+
+
+  // @ViewChild(TemplateRef, { static: true })
+  // content!: TemplateRef<any>;
 
   constructor(
-    private service: CoinService,
+    private _coinService: CoinService,
     private toastr: ToastrService,
     private security: SecurityService,
     public auth: AuthService,
@@ -34,31 +47,36 @@ export class MyCoinsComponent implements OnInit, OnDestroy {
     private user$: UserService
   ) { }
 
-/////////////////////
-  selectedCar?: number;
 
-    cars = [
-        { id: 1, name: 'Volvo' },
-        { id: 2, name: 'Saab' },
-        { id: 3, name: 'Opel' },
-        { id: 4, name: 'Audi' },
-    ];
 
   ngOnInit(): void {
     // this.getCoinList();
+
+    this.loading=true;
     this.user$.getUserWithCoinList().subscribe({
-      next: (data:UserModel) => {
+      next: (data: UserModel) => {
         this.favList = data.usercoins || [];
         console.log(data);
         this.coinList = data.usercoins || [];
         // this.getCoinList();
+        this.loading =false;
+
       }
     });
+
+    this.user$.getAllUserCoins().subscribe(ucoins=>
+      { this.alertCoinList = ucoins ;
+        console.log('alertcoinList:   ',this.alertCoinList);
+      }).closed
+
+
 
 
   }
 
-  ngOnDestroy():void{
+
+
+  ngOnDestroy(): void {
     this.suscription?.unsubscribe();
   }
 
@@ -67,27 +85,24 @@ export class MyCoinsComponent implements OnInit, OnDestroy {
     return this.favList.some(c => c.id == coin.id);
   }
 
-  // favoriteCoin(coin?: CoinModel) {
-  //   if (coin && this.includesCoin(coin)) {
-  //     // this.removeItem(this.favList, coin);
-  //     this.favList = this.favList.filter(c => c.id != coin.id);
-  //     this.toastr.success(`Moneda: ${coin.name} quitada de favoritas`);
+  includesAlertCoin(coin: CoinModel){
+    return this.alertCoinList.some(uc => uc.coinId == coin.id );
+  }
 
-  //   } else
-  //     if (coin) {this.favList.push(coin)
-  //       this.toastr.success(`Moneda: ${coin.name} agregada a favoritas`)
-  //     }
-  //   this.favcoins$.setCoins(this.favList);
-
+  // includesNotifiedCoin(coin: CoinModel){
+  //   return this.alertCoinList.some(uc => uc.coinId == coin.id && uc.notified==true);
   // }
+
 
   favoriteCoin(coin?: CoinModel) {
     if (coin && this.includesCoin(coin)) {
       this.user$.removeUserCoin(coin.id!).subscribe(
-        { next: data => { console.log(data);
-          this.favList = this.favList.filter(c => c.id != coin.id);
-          this.toastr.success(`Moneda: ${coin.name} quitada de favoritas`);
-        }
+        {
+          next: data => {
+            console.log(data);
+            this.favList = this.favList.filter(c => c.id != coin.id);
+            this.toastr.success(`Moneda: ${coin.name} quitada de favoritas`);
+          }
 
         }
       )
@@ -95,10 +110,13 @@ export class MyCoinsComponent implements OnInit, OnDestroy {
     } else
       if (coin) {
         this.user$.addUserCoin(coin).subscribe(
-        { next: data => {console.log(data)
-          this.favList.push(coin);
-          this.toastr.success(`Moneda: ${coin.name} agregada a favoritas`)
-        }} )
+          {
+            next: data => {
+              console.log(data)
+              this.favList.push(coin);
+              this.toastr.success(`Moneda: ${coin.name} agregada a favoritas`)
+            }
+          })
 
       }
     this.favcoins$.setCoins(this.favList);
@@ -115,22 +133,91 @@ export class MyCoinsComponent implements OnInit, OnDestroy {
   }
 
 
-// getCoinList(){
-//   this.coinList=this.favcoins$.obtenerCoins();
-// }
+
   getCoinList() {
-    this.service.getCoinList().subscribe({
+    this._coinService.getCoinList().subscribe({
       next: (data: CoinModel[]) => {
         this.coinList = data
-        this.coinList = this.coinList.filter(c => this.favList.map(f => f.id).includes(c.id) );
+        this.coinList = this.coinList.filter(c => this.favList.map(f => f.id).includes(c.id));
 
       }
     });
   }
 
-  openVerticallyCentered(content:any) {
-    this.modalService.open(content, { centered: true });
+
+  openModal(coin: CoinModel) {
+    this.user$.getUserCoinsFor(coin.id!).subscribe(
+      {
+        next: data => {
+          console.log(data)
+          if (!data || !data.length) {
+            this.openCreationForm(coin);
+
+          } else {
+            console.log('alerta existe');
+            // const alertmodal = this.modalService.open(NgbdModalContent, { centered: true })
+            const alertmodal = this.modalService.open(NgbdModalContent, { centered: true });
+            alertmodal.componentInstance.ucoin = data[0];
+            alertmodal.componentInstance.coin = coin;
+            console.log(data);
+            alertmodal.result.then((eliminar) => {
+              this.removeAlert(data[0])
+              this.toastr.success('Alerta eliminada');
+              this.user$.getAllUserCoins().subscribe(ucoins=>
+                { this.alertCoinList = ucoins   })
+            },
+
+              (cancelar) => {
+                console.log();
+              }
+            )
+          }
+        }
+      })
   }
 
 
+
+  openCreationForm(coin: CoinModel) {
+    const modref = this.modalService.open(ModalComponent, { centered: true });
+    modref.componentInstance.coin = coin;
+    modref.result.then((guardar) => {
+      console.log('alerta guardada');
+      this.user$.getAllUserCoins().subscribe(ucoins=>
+        { this.alertCoinList = ucoins})
+    },
+      (cancelar) => {
+        console.log('cancelado');
+      }
+
+    )
+  }
+
+
+  removeAlert(ucoin: UserCoinModel) {
+    this.user$.removeAlertFrom(ucoin).subscribe({
+      next(data) {
+        console.log('Agregado: ', data);
+
+      },
+      error(data) {
+        console.log('Error : ', data);
+      }
+    })
+  }
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+

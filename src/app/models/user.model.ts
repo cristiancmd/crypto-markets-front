@@ -5,5 +5,7 @@ export class UserModel{
   email?:string;
   name?:string;
   usercoins?: CoinModel[];
-
+  premium?:boolean;
+  picture?:string;
+  remainingmails?:number;
 }

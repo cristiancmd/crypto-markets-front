@@ -5,5 +5,7 @@ export class UserCoinModel{
   userId?:string;
   max?:number;
   min?:number;
+  email?:string;
+  notified?:boolean;
 
 }

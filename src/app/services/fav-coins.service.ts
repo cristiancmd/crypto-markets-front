@@ -15,15 +15,9 @@ export class FavCoinsService {
     private _user$: UserService
   ) { }
 
-  obtenerCoins():Observable<CoinModel[]>{
+  obtenerCoins():CoinModel[]{
 
-    // this._user$.getUserWithCoinList().subscribe(
-    //   { next: (data:UserModel)=> {
-    //                 this.coinList= data.usercoins }
-    // });
 
-    // console.log(this.coinList);
-    // return this.coinList;
     return JSON.parse(localStorage.getItem(this.items_key) || "[]" );
 
   }

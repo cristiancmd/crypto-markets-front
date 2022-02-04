@@ -10,6 +10,7 @@ import { CoinDetailComponent } from './modules/coin-detail/coin-detail.component
 import { CoinsComponent } from './modules/coins/coins.component';
 import { AboutComponent } from './modules/about/about.component';
 import { MyCoinsComponent } from './modules/my-coins/my-coins.component';
+import { ProfileComponent } from './modules/profile/profile.component';
 
 const routes: Routes = [
 
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'mycoins', component: MyCoinsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'about', component: AboutComponent },
+  { path: 'profile', component: ProfileComponent },
 
 ];
 

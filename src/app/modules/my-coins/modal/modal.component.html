@@ -1,0 +1,92 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">Agregar alerta</h4>
+  <button
+    type="button"
+    class="btn btn-outline-light"
+    aria-label="Close"
+    (click)="modal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div *ngIf="this.loading" class="modal-body d-flex flex-row align-items-center justify-content-center">Aguarde.. </div>
+<div *ngIf="!this.loading" class="modal-body">
+
+
+
+  <form
+  class="row "
+
+  [formGroup]="userForm"
+  (ngSubmit)="submit()"
+  >
+  <div class="d-flex flex-row align-items-center justify-content-center">
+
+
+
+    <div class="p2">
+      <label>Cuando</label>
+    </div>
+    <div class="p-2">
+
+        <label>{{ coin?.name }}</label>
+      </div>
+      <div class="p-2 w-50 ">
+        <ng-select
+          [clearable]="false"
+          formControlName="options"
+          (ngModelChange)="onSelectOptions($event)"
+
+          required
+        >
+          <ng-option *ngFor="let op of options" [value]="op.id" required>
+            {{ op.name }}
+          </ng-option>
+        </ng-select>
+
+      </div>
+
+      <div class="p-2">
+        <div class="input-group ">
+          <span class="input-group-text">$</span>
+          <input
+          id="precio"
+          required
+          type="number"
+          class="form-control"
+          formControlName="precio"
+
+        />
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <p>Precio actual: ${{ coin?.avgPrice }} </p>
+    </div>
+
+    <div class="container mt-4 mb-4">
+      <span *ngIf="submited && userForm.invalid" class="badge bg-danger">
+        Debe completar todos los campos
+      </span>
+    </div>
+
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-light"
+      (click)="modal.dismiss('Cancelar')"
+    >
+      Cancelar
+    </button>
+    <button type="button" class="btn btn-outline-light" (click)="submit()">
+      Guardar
+    </button>
+  </div>
+</form>
+</div>
+
+

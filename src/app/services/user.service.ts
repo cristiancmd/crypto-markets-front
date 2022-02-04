@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class UserService {
   url: string = environment.API_URL;
 
@@ -27,6 +28,15 @@ export class UserService {
     return this.http.post(`${this.url}/user-coins`, usercoin)
   }
 
+  addMaxOrMinToCoin(userCoin: UserCoinModel): Observable<UserCoinModel> {
+    return this.http.patch(`${this.url}/current-user-coins/${userCoin.coinId}`, userCoin)
+  }
+
+  getUserCoinsFor(coinid: string): Observable<UserCoinModel[]> {
+    return this.http.get<UserCoinModel[]>(`${this.url}/my-coins?filter[where][notified]=false&filter[where][coinId]=${coinid}`)
+
+  }
+
   getUserWithCoinList(): Observable<UserModel> {
 
 
@@ -36,7 +46,22 @@ export class UserService {
 
   }
 
+  getAllUserCoins():Observable<UserCoinModel[]>{
 
+    return this.http.get<UserCoinModel[]>(`${this.url}/my-coins?filter[where][notified]=false`)
+  }
+  // return this.http.get<UserCoinModel[]>(`${this.url}/my-coins?filter[where][notified]=false`)
+
+
+
+  removeAlertFrom(userCoin: UserCoinModel): Observable<UserCoinModel> {
+    let newUserCoin = new UserCoinModel;
+    newUserCoin.coinId = userCoin.coinId;
+    newUserCoin.userId = userCoin.userId;
+    newUserCoin.email = userCoin.email;
+
+    return this.http.put(`${this.url}/user-coins/${userCoin.id}`, newUserCoin)
+  }
 
   removeUserCoin(id: string): Observable<UserCoinModel> {
     return this.http.delete<UserCoinModel>(`${this.url}/current-user-coins/${id}`)
@@ -44,6 +69,10 @@ export class UserService {
 
 
 
+  getPaymentLink():Observable<any>{
+    return this.http.get<any>(`${this.url}/payment`)
+
+  }
 
 
 
