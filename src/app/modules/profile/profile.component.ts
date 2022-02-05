@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { UserModel } from 'src/app/models/user.model';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
@@ -13,7 +14,8 @@ export class ProfileComponent implements OnInit {
   user?:UserModel;
   userLoaded?: Promise<boolean>;
 
-  constructor(private user$: UserService) { }
+  constructor(private user$: UserService,
+    private toastr:ToastrService) { }
 
   ngOnInit(): void {
     this.user$.getUserWithCoinList().subscribe(data=>
@@ -22,6 +24,8 @@ export class ProfileComponent implements OnInit {
         this.user = data;
         this.premium = data.premium || this.premium
         this.userLoaded = Promise.resolve(true);
+
+
       }
     )
 

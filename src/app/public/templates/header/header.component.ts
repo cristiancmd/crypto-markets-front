@@ -36,9 +36,9 @@ export class HeaderComponent implements OnInit {
       {
         next: (data) => {
           console.log('auth  ', data)
-          if (data) {
-            this.toastr.info('Sesion iniciada')
-          }
+          // if (data) {
+          //   this.toastr.info('Sesion iniciada')
+          // }
         }
 
       })

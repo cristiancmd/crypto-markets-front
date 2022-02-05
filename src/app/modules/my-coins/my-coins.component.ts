@@ -25,8 +25,9 @@ export class MyCoinsComponent implements OnInit, OnDestroy {
   coinList: CoinModel[] = [];
   public favList: CoinModel[] = [];
   suscription?: Subscription;
-  alertCoinList: UserCoinModel[]=[];
-  loading=true;
+  alertCoinList: UserCoinModel[] = [];
+  loading = true;
+  remainingsAlert = false;
 
   @Input() mycoins?: string;
   @ViewChild('content')
@@ -52,22 +53,31 @@ export class MyCoinsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // this.getCoinList();
 
-    this.loading=true;
+    this.loading = true;
     this.user$.getUserWithCoinList().subscribe({
       next: (data: UserModel) => {
         this.favList = data.usercoins || [];
         console.log(data);
         this.coinList = data.usercoins || [];
         // this.getCoinList();
-        this.loading =false;
+        if (data.remainingmails! < 1) {
+          this.toastr.warning('Te quedaste sin alertas gratuitas por hoy. Actualiza tu cuenta a premium para recibir alertas ilimitadas, desde tu perfil', 'Atencion', { timeOut: 15000 });
+          this.remainingsAlert = true;
+        } else { this.remainingsAlert = false; }
+
+        this.loading = false;
+
+
+
 
       }
     });
 
-    this.user$.getAllUserCoins().subscribe(ucoins=>
-      { this.alertCoinList = ucoins ;
-        console.log('alertcoinList:   ',this.alertCoinList);
-      }).closed
+    this.user$.getAllUserCoins().subscribe(ucoins => {
+      this.alertCoinList = ucoins;
+      console.log('alertcoinList:   ', this.alertCoinList);
+    }).closed
+
 
 
 
@@ -85,8 +95,8 @@ export class MyCoinsComponent implements OnInit, OnDestroy {
     return this.favList.some(c => c.id == coin.id);
   }
 
-  includesAlertCoin(coin: CoinModel){
-    return this.alertCoinList.some(uc => uc.coinId == coin.id );
+  includesAlertCoin(coin: CoinModel) {
+    return this.alertCoinList.some(uc => uc.coinId == coin.id);
   }
 
   // includesNotifiedCoin(coin: CoinModel){
@@ -163,8 +173,7 @@ export class MyCoinsComponent implements OnInit, OnDestroy {
             alertmodal.result.then((eliminar) => {
               this.removeAlert(data[0])
               this.toastr.success('Alerta eliminada');
-              this.user$.getAllUserCoins().subscribe(ucoins=>
-                { this.alertCoinList = ucoins   })
+              this.user$.getAllUserCoins().subscribe(ucoins => { this.alertCoinList = ucoins })
             },
 
               (cancelar) => {
@@ -183,8 +192,10 @@ export class MyCoinsComponent implements OnInit, OnDestroy {
     modref.componentInstance.coin = coin;
     modref.result.then((guardar) => {
       console.log('alerta guardada');
-      this.user$.getAllUserCoins().subscribe(ucoins=>
-        { this.alertCoinList = ucoins})
+      this.user$.getAllUserCoins().subscribe(ucoins => { this.alertCoinList = ucoins });
+      if(this.remainingsAlert)
+        this.toastr.warning('Te quedaste sin alertas gratuitas por hoy. Actualiza tu cuenta a premium para recibir alertas ilimitadas!', 'Atencion', { timeOut: 0 });
+
     },
       (cancelar) => {
         console.log('cancelado');
