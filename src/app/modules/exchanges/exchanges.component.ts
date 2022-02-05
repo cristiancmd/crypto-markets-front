@@ -5,12 +5,13 @@ import { Component, OnInit } from '@angular/core';
 import { ExchangeService } from 'src/app/services/exchange.service';
 import { CoinModel } from 'src/app/models/coin.model';
 import { SecurityService } from 'src/app/services/security.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-exchanges',
   templateUrl: './exchanges.component.html',
-  styleUrls: ['./exchanges.component.css']
+  styleUrls: ['./exchanges.component.css'],
+  providers: [NgbAccordionConfig]
 })
 export class ExchangesComponent implements OnInit {
   coinId?:string ;
@@ -23,8 +24,12 @@ export class ExchangesComponent implements OnInit {
     private _coinService: CoinService,
     private security: SecurityService,
     public auth: AuthService,
-    private modalService: NgbModal
-  ) { }
+    private modalService: NgbModal,
+    config: NgbAccordionConfig
+  ) {
+    config.closeOthers = true;
+    // config.type = 'secondary';
+   }
 
   ngOnInit(): void {
     this.getCoinList();

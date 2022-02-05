@@ -2,3 +2,32 @@
 @import '~codemirror/theme/material';
 
 
+
+
+.card {
+  background-color: rgb(159, 147, 201)!important;
+  border-color: rgb(52, 70, 117);
+  color:rgb(8, 8, 8)
+
+}
+
+
+
+::ng-deep #toggle-1 {
+  background-color: rgb(49, 46, 70);
+
+
+}
+
+::ng-deep #toggle-1-header {
+  background-color: rgb(49, 46, 70);
+
+
+}
+
+
+::ng-deep .btn-link {
+  color:darkturquoise
+
+}
+

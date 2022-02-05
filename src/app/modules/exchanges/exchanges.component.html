@@ -24,24 +24,40 @@
   </div>
 </div>
 
+
+
+<!-- <hr /> -->
+
+
+
 <div *ngFor="let exchange of exchangeList">
   <hr />
 
-  <div class="card mb-4 mt-4" style="background-color: rgb(194, 180, 216)">
-    <div class="card-body">
+  <div class="card mb-4 mt-4" >
+    <div class="card-body" >
       <h5 class="card-title">Nombre: {{ exchange.name }}</h5>
       <p class="card-text">Url: {{ exchange.url }}</p>
-      <p class="card-text">Script:</p>
 
-      <ngx-codemirror
-        [(ngModel)]="exchange.script"
-        [options]="{
-          lineNumbers: true,
-          theme: 'material',
-          mode: 'javascript',
-          readOnly: true
-        }"
-      ></ngx-codemirror>
+
+      <ngb-accordion #acc="ngbAccordion">
+        <ngb-panel id="toggle-1" title="Script">
+          <ng-template ngbPanelContent>
+            <div>
+              <ngx-codemirror
+                [(ngModel)]="exchange.script"
+                [options]="{
+                  lineNumbers: true,
+                  theme: 'material',
+                  mode: 'javascript',
+                  readOnly: true
+                }"
+              ></ngx-codemirror>
+
+            </div>
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+
       <div class="col mt-4">
         <button class="btn btn-outline">
           <i
@@ -51,6 +67,9 @@
           ></i>
         </button>
       </div>
+
+
+
     </div>
   </div>
 </div>
