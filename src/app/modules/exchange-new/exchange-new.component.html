@@ -45,20 +45,20 @@
           formControlName="script"
           type="text"
           id="script"
+          #script
         ></ngx-codemirror>
-        <!-- <textarea
-          id="script"
-          type="text"
-          class="md-textarea form-control"
-          formControlName="script"
-          rows="3"
-        ></textarea> -->
+
+      <div>
+        <button type="button" (click)="test(script.value)" class="btn btn-primary mt-3">Testear</button>
+
+      </div>
       </div>
       <div class="container mt-4 mb-4">
         <span *ngIf="submited && newExchange.invalid" class="badge bg-danger">
           Debe completar todos los campos!
         </span>
       </div>
+
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-1">
@@ -70,6 +70,7 @@
               Volver
             </button>
           </div>
+
           <div class="col-1">
             <button type="submit" class="btn btn-outline-primary">
               Aceptar
@@ -79,4 +80,39 @@
       </div>
     </div>
   </form>
+
+
+
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Error</h4>
+      <button type="btn btn-light" class="btn btn-light" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>El script no retornó ningun valor!</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>
+
+  <ng-template #content2 let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Exito</h4>
+      <button type="button" class=" btn btn-light" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>El script retorno el valor: {{this.scriptval}} </p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>
+
+
 </div>

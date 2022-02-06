@@ -75,7 +75,10 @@ export class UserService {
   }
 
 
+  testScript(script:any):Observable<any>{
+    return this.http.post(`${this.url}/test`,script);
 
+  }
 
 
 

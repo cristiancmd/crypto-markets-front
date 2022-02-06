@@ -29,6 +29,7 @@ export class MyCoinsComponent implements OnInit, OnDestroy {
   loading = true;
   remainingsAlert = false;
 
+
   @Input() mycoins?: string;
   @ViewChild('content')
   content!: ElementRef;

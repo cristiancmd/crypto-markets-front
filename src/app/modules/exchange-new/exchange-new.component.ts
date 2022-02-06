@@ -1,5 +1,7 @@
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UserService } from 'src/app/services/user.service';
 import { ExchangeService } from 'src/app/services/exchange.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -16,14 +18,25 @@ export class ExchangeNewComponent implements OnInit {
   submited = false;
   id: string | null;
   public javascriptinitvar:string = "var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest; \n //escriba su script de obtención de precio aqui"
+  scriptval?:number;
+
+  @ViewChild('content')
+  content!: ElementRef;
+
+  @ViewChild('content2')
+  content2!: ElementRef;
+
+  @ViewChild('script')
+  inputScript!: ElementRef;
 
   constructor(
     private form: FormBuilder,
     private exchangeSvc: ExchangeService,
     private router: Router,
     private aRoute: ActivatedRoute,
-    private toastr: ToastrService
-
+    private toastr: ToastrService,
+    private user$: UserService,
+    private modalService: NgbModal
 
   ) {
 
@@ -38,9 +51,29 @@ export class ExchangeNewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+
   }
 
+
   addExchange(){
+    this.submited= true
+
+    if(this.javascriptinitvar.length==0 ) return;
+
+    this.user$.testScript(this.javascriptinitvar).subscribe(data=>{
+      if(data==0) {
+        this.modalService.open(this.content, { modalDialogClass: 'dark-modal' });
+        return;
+      }else{
+        this.addExchangeSubmit();
+
+      }
+    })
+  }
+
+
+  addExchangeSubmit(){
     this.submited= true
     if(this.newExchange.invalid){
       return;
@@ -50,7 +83,6 @@ export class ExchangeNewComponent implements OnInit {
       url: this.newExchange.value.url,
       script: this.newExchange.value.script,
       coinId: this.id
-
     }
     this.exchangeSvc.addExchange(exch).subscribe({
       next(data) {
@@ -69,9 +101,28 @@ export class ExchangeNewComponent implements OnInit {
    })
   }
 
-  ngOnChanges() {
 
+
+  test(script:string){
+
+    this.user$.testScript(script).subscribe(data=>{
+      this.scriptval=data;
+      if(data==0){
+        this.modalService.open(this.content, { modalDialogClass: 'dark-modal' });
+      }else{
+        this.modalService.open(this.content2, { modalDialogClass: 'dark-modal' });
+      }
+
+
+    })
 
   }
+
+
+
+
+
+
+
 
 }
