@@ -36,7 +36,7 @@ const routes: Routes = [
   // { path: 'login', component: LoginComponent  },
   { path: 'about', component: AboutComponent },
   { path: 'profile', component: ProfileComponent, canActivate:[GuardGuard] },
-  { path: 'index', component: LandingComponent },
+  { path: 'home', component: LandingComponent },
 
 ];
 
