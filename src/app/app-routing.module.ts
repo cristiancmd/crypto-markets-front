@@ -25,7 +25,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'coins',
+    redirectTo: 'mycoins',
     pathMatch: 'full'
   },
   { path: 'exchanges', component: ExchangesComponent, canActivate:[GuardGuard] },

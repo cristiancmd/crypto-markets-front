@@ -1,3 +1,4 @@
+import { AuthService } from '@auth0/auth0-angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
-
-  constructor() { }
+  clicked = false ;
+  constructor(public auth:AuthService) { }
 
   ngOnInit(): void {
   }
 
+
+
+  login(){
+    this.clicked = true;
+    this.auth.loginWithRedirect()
+  }
 }

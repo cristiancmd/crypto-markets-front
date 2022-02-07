@@ -19,7 +19,7 @@ export class GuardGuard implements CanActivate {
         this.auth.isAuthenticated$.subscribe(data=> {
           if(data) resolve(true);
           if(!data){
-            this.router.navigateByUrl('/coins');
+            this.router.navigateByUrl('/home');
             resolve(false);
           }
 

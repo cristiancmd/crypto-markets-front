@@ -6,13 +6,22 @@
         <h4>Seguimiento de criptomonedas y exchanges personalizado  </h4>
         <form class="hero-subscribe-from">
           <!-- <input type="text" placeholder="Enter your email"> -->
-          <button class="site-btn sb-gradients">Comenzar</button>
+          <button *ngIf="!this.clicked" class="site-btn sb-gradients" (click)="login()">Comenzar</button>
+          <div *ngIf="this.clicked" class="icon">
+            <div class="spinner-border" role="status" >
+              <span class="sr-only" id="loading"></span>
+            </div>
+          </div>
         </form>
       </div>
       <div class="col-md-6">
-        <img src="assets/laptop.png" class="laptop-image" alt="">
+        <img src="assets/laptop2.png" class="laptop-image" alt="">
       </div>
     </div>
+  </div>
+
+  <div class="techs-images">
+    <img id="t_logos" src="assets/techs_logos.png" alt="" >
   </div>
 </section>
 

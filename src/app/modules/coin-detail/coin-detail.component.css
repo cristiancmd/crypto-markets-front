@@ -1,1 +1,16 @@
 
+#chart{
+
+  /* text-align: center; */
+  align-content: center;
+  align-items: center;
+
+
+}
+
+#in-chart{
+
+  align-content: center;
+  align-items: center;
+  align-self: center;
+}

@@ -5,14 +5,21 @@
   color: aliceblue;
 }
 
-
+ .nav-link:active{
+  color: rgb(104, 50, 223)!important;
+}
 
 .nav-link {
-  color: rgb(233, 230, 230);
+  color: rgb(224, 224, 224)!important;
 
 }
 
 .nav-link:hover {
-  color: rgb(200, 174, 255);
+  color: rgb(200, 174, 255)!important;
 
 }
+
+
+
+
+

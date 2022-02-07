@@ -75,10 +75,10 @@
     </div>
   </div>
 
-  <div class="row" *ngIf="prices.length > 0 && exchanges.length > 0">
+  <div id="chart"  *ngIf="prices.length > 0 && exchanges.length > 0">
     <h5>Grafico</h5>
 
-    <app-chart [datos]="prices"></app-chart>
+    <app-chart id="in-chart" [datos]="prices"></app-chart>
   </div>
 </div>
 <hr/>

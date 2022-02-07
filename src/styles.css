@@ -37,3 +37,7 @@ body { margin: 0; font-family: "Roboto", "Helvetica Neue", "sans-serif"; }
   align-items: center;
   justify-content: center;
 }
+.btn {
+  border-radius: 2rem!important;
+  font-weight: 200!important;
+ }

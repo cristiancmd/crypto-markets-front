@@ -1,9 +1,11 @@
 <div class="container mt-4">
   <div>
+    <h2>Coins</h2>
+    <hr>
     <button
       *ngIf="auth.isAuthenticated$ | async"
       type="button"
-      class="btn btn-outline-dark"
+      class="btn btn-outline-dark mt-4 mb-2"
       routerLink="/coins/new"
     >
       Agregar

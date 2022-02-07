@@ -1,13 +1,65 @@
+<header class="p-3 bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"
+        ><img src="assets/cm_logo2.png" alt="" width="110"
+      /></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarText"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ml-2">
+          <li *ngIf="auth.isAuthenticated$ | async">
+            <a routerLink="/coins" class="nav-link px-2">Coins</a>
+          </li>
+          <li *ngIf="auth.isAuthenticated$ | async">
+            <a routerLink="/exchanges" class="nav-link px-2">Exchanges</a>
+          </li>
+          <li *ngIf="auth.isAuthenticated$ | async">
+            <a routerLink="/mycoins" class="nav-link px-2">Mis Monedas</a>
+          </li>
+          <li *ngIf="auth.isAuthenticated$ | async">
+            <a routerLink="/profile" class="nav-link px-2">Mi perfil</a>
+          </li>
+          <li *ngIf="auth.isAuthenticated$ | async"><a routerLink="/about" class="nav-link px-2">About</a></li>
+        </ul>
 
+        <div class="d-flex flex-row justify-content-end">
+          <ngx-avatar class="me-3" size="50" [name]="userName"></ngx-avatar>
+          <button
+            *ngIf="!(auth.isAuthenticated$ | async)"
+            class="btn btn-outline-light me-2"
+            (click)="login()"
+          >
+            Login
+          </button>
+          <button
+            *ngIf="auth.isAuthenticated$ | async"
+            class="btn btn-outline-light me-2"
+            (click)="logout()"
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
 
-<header class="p-3 bg-dark ">
-  <div class="container ">
-    <div class="d-flex  justify-content-between align-items-center ">
+  <!-- <div class="container ">
+    <div class="d-flex  justify-content-start align-items-center ">
 
+      <img src="assets/cm_logo2.png" alt="" width="110">
 
-      <ul class="nav ">
-        <li>
-        </li>
+      <ul class="nav me-2 ml-2 ">
+
 
         <li><a routerLink="/coins" class="nav-link px-2 ">Coins</a></li>
         <li *ngIf="(auth.isAuthenticated$ | async)"> <a routerLink="/exchanges" class="nav-link px-2 ">Exchanges</a></li>
@@ -20,14 +72,12 @@
       </ul>
       <div class="p2" >
 
-        <h5>
-          <button routerLink="/coins" class="btn-1">CryptoMarketsIAW</button>
-        </h5>
+
       </div>
 
 
 
-      <div class="d-flex flex-row">
+      <div class="d-flex flex-row justify-content-end">
 
         <ngx-avatar class="me-3" size="50" [name]="userName"></ngx-avatar>
         <button *ngIf="!(auth.isAuthenticated$ | async)" class="btn btn-outline-light me-2" (click)="login()">Login</button>
@@ -35,5 +85,5 @@
       </div>
 
     </div>
-  </div>
+  </div>  -->
 </header>

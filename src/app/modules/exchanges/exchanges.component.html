@@ -1,6 +1,7 @@
 <div class="container mt-4">
   <h2>Exchanges</h2>
-  <div class="col col-4 mt-4 mb-2">
+  <hr>
+  <div class="col col-4 mt-4 mb-4">
     <button
       *ngIf="auth.isAuthenticated$ | async"
       type="button"
@@ -10,7 +11,7 @@
       Agregar
     </button>
   </div>
-  <div class="col col-4 mt-2">
+  <div class="col col-4 mt-2 mb-2">
     <label>Seleccione una criptomoneda</label>
 
     <ng-select

@@ -1,6 +1,7 @@
 #divChart{
 
 display:block;
-
-
+text-align: center;
+align-content: center;
+align-self: center;
 }
