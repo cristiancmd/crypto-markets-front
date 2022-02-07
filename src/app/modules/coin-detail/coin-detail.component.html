@@ -81,3 +81,34 @@
     <app-chart [datos]="prices"></app-chart>
   </div>
 </div>
+<hr/>
+
+<div *ngIf="exchanges.length > 0" class="container mt-4">
+
+  <h4>Exchanges para {{coin.name}}</h4>
+
+  <table class=" table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Url</th>
+        <th scope="col">Precio</th>
+      </tr>
+    </thead>
+    <tbody>
+
+
+
+      <tr *ngFor="let ex of this.exchanges">
+        <th scope="row"> {{this.exchanges.lastIndexOf(ex)+1}}</th>
+        <td>{{ex.name}}</td>
+        <td>{{ex.url}}</td>
+        <td>{{ex.lastPrice | currency}}</td>
+
+
+      </tr>
+
+    </tbody>
+  </table>
+</div>

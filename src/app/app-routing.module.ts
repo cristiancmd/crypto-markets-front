@@ -1,3 +1,5 @@
+import { LandingComponent } from './modules/landing/landing.component';
+import { GuardGuard } from './modules/guard.guard';
 
 import { LoginComponent } from './modules/login/login.component';
 import { ExchangeNewComponent } from './modules/exchange-new/exchange-new.component';
@@ -14,26 +16,27 @@ import { ProfileComponent } from './modules/profile/profile.component';
 
 const routes: Routes = [
 
-  { path: 'coins/new', component: CoinNewComponent },
+  { path: 'coins/new', component: CoinNewComponent, canActivate:[GuardGuard] },
 
   { path: 'coins', component: CoinsComponent },
 
   {
-    path:'coins/:id',component: CoinDetailComponent
+    path: 'coins/:id', component: CoinDetailComponent, canActivate:[GuardGuard]
   },
   {
     path: '',
     redirectTo: 'coins',
     pathMatch: 'full'
   },
-  { path: 'exchanges', component: ExchangesComponent },
-  // { path: 'chart', component: ChartComponent },
-  { path: 'exchanges', component: ExchangesComponent },
-  { path: 'exchanges/new/:id', component: ExchangeNewComponent },
-  { path: 'mycoins', component: MyCoinsComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'exchanges', component: ExchangesComponent, canActivate:[GuardGuard] },
+
+  { path: 'exchanges', component: ExchangesComponent, canActivate:[GuardGuard] },
+  { path: 'exchanges/new/:id', component: ExchangeNewComponent, canActivate:[GuardGuard] },
+  { path: 'mycoins', component: MyCoinsComponent , canActivate:[GuardGuard]},
+  // { path: 'login', component: LoginComponent  },
   { path: 'about', component: AboutComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile', component: ProfileComponent, canActivate:[GuardGuard] },
+  { path: 'index', component: LandingComponent },
 
 ];
 

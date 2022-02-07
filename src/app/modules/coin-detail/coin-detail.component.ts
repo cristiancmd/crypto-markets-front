@@ -1,3 +1,4 @@
+import { ExchangeService } from 'src/app/services/exchange.service';
 import { ExchangeModel } from './../../models/exchange.model';
 import { PriceService } from './../../services/price.service';
 import { PriceModel } from './../../models/price.model';
@@ -41,8 +42,8 @@ export class CoinDetailComponent implements OnInit {
     private _priceService: PriceService,
     private router: Router,
     private aRoute: ActivatedRoute,
-    private form: FormBuilder
-
+    private form: FormBuilder,
+    private _exchangeService: ExchangeService
   ) {
     this.id = this.aRoute.snapshot.paramMap.get('id');
 
@@ -84,9 +85,25 @@ export class CoinDetailComponent implements OnInit {
     }
   }
 
+  // getExchanges() {
+  //   if (this.id !== null) {
+  //     this._coinService.getRelatedExchanges(this.id).subscribe({
+  //       next: (data: ExchangeModel[]) => {
+  //         this.exchanges = data;
+  //         console.log('exchanges', this.exchanges);
+  //         if (!this.selectedExchange.id) {
+  //           this.selectedExchange = this.exchanges[0];
+  //           this.selected = this.selectedExchange.id;
+  //         }
+
+  //         this.getPriceList();
+  //       }
+  //     });
+  //   }
+  // }
   getExchanges() {
     if (this.id !== null) {
-      this._coinService.getRelatedExchanges(this.id).subscribe({
+      this._exchangeService.getExchangeInfoForCoin(this.id).subscribe({
         next: (data: ExchangeModel[]) => {
           this.exchanges = data;
           console.log('exchanges', this.exchanges);
@@ -109,7 +126,7 @@ export class CoinDetailComponent implements OnInit {
       this._priceService.getPricesFor(date, this.id, this.selected).subscribe({
         next: (data: PriceModel[]) => {
           this.prices = data;
-          console.log(data)
+          // console.log(data)
 
 
         }

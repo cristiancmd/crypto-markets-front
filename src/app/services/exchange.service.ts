@@ -32,6 +32,11 @@ getExchangeListFor(id:string):Observable<ExchangeModel[]> {
   return this.http.get<ExchangeModel[]>(`${this.url}/coins/${id}/exchanges`)
 }
 
+getExchangeInfoForCoin(id:string):Observable<ExchangeModel[]> {
+
+  return this.http.get<ExchangeModel[]>(`${this.url}/coins/${id}/exchanges?filter%5Bfields%5D=name&filter%5Bfields%5D=id&filter%5Bfields%5D=url&filter%5Bfields%5D=coinId&filter%5Bfields%5D=lastPrice`)
+}
+
 getExchange(id:string):Observable<ExchangeModel> {
 
   return this.http.get<ExchangeModel>(`${this.url}/exchanges/${id}`)

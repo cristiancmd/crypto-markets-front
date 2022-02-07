@@ -5,7 +5,7 @@ export class ExchangeModel {
   url?: string;
   script?: string;
   coinId?:string;
-
+  lastPrice?:number;
 
 
 

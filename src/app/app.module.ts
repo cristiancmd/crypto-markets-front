@@ -32,6 +32,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ModalComponent } from './modules/my-coins/modal/modal.component';
 import { ProfileComponent } from './modules/profile/profile.component';
+import { LandingComponent } from './modules/landing/landing.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { ProfileComponent } from './modules/profile/profile.component';
     MyCoinsComponent,
     ModalComponent,
     NgbdModalContent,
-    ProfileComponent
+    ProfileComponent,
+    LandingComponent
 
   ],
   imports: [

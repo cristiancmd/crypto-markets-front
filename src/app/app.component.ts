@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 
@@ -12,7 +11,7 @@ export class AppComponent implements OnInit {
 
 
 
-  constructor(private http: HttpClient,
+  constructor(
     public auth: AuthService,
   ) {
 
@@ -21,7 +20,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
 
+
   }
+
 
 
 
