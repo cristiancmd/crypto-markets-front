@@ -2,12 +2,13 @@ import { UserService } from './../../services/user.service';
 import { FavCoinsService } from './../../services/fav-coins.service';
 import { Observable } from 'rxjs';
 import { CoinService } from './../../services/coin.service';
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { CoinModel } from 'src/app/models/coin.model';
 import { ToastrService } from 'ngx-toastr';
 import { SecurityService } from 'src/app/services/security.service';
 import { AuthService } from '@auth0/auth0-angular';
 import { UserModel } from 'src/app/models/user.model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-coins',
@@ -21,13 +22,18 @@ export class CoinsComponent implements OnInit, OnDestroy {
 
   @Input() mycoins?:string;
 
+  @ViewChild('confirm')
+  confirm!: ElementRef;
+
   constructor(
     private _coinservice: CoinService,
     private toastr: ToastrService,
     private security: SecurityService,
     public auth: AuthService,
     private favcoins$: FavCoinsService,
-    private user$: UserService
+    private user$: UserService,
+    private modalService: NgbModal
+
   ) { }
   ngOnDestroy(): void {
 
@@ -36,17 +42,24 @@ export class CoinsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getCoinList();
-    this.user$.getUserWithCoinList().subscribe({
-      next: (data:UserModel) => {
-        this.favList = data.usercoins || [];
-        this.favcoins$.setCoins(this.favList);
-        console.log(data);
-
-        // this.getCoinList();
+    this.auth.isAuthenticated$.subscribe(data=>
+      {
+        if(data){
+          this.user$.getUserWithCoinList().subscribe({
+            next: (data:UserModel) => {
+              this.favList = data.usercoins || [];
+              this.favcoins$.setCoins(this.favList);
+              console.log(data);
+              // this.getCoinList();
+            }
+          });
+          this.favList = this.favcoins$.obtenerCoins();
+          console.log('coinlist : ', this.favList)
+        }
       }
-    });
-    this.favList = this.favcoins$.obtenerCoins();
-    console.log('coinlist : ', this.favList)
+
+    )
+
 
   }
 
@@ -93,10 +106,15 @@ export class CoinsComponent implements OnInit, OnDestroy {
   }
 
   clickMethod(name: string) {
-    if (confirm("Desea eliminar esta moneda? ")) {
-      this.deleteCoin(name);
 
-    }
+    const alertmodal= this.modalService.open(this.confirm, { modalDialogClass: 'dark-modal' });
+    alertmodal.result.then((eliminar) => {
+      this.deleteCoin(name);
+    },
+      (cancelar) => {
+
+      }
+    )
   }
 
   getCoinList() {

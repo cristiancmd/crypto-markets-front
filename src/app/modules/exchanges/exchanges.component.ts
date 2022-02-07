@@ -1,7 +1,7 @@
 import { AuthService } from '@auth0/auth0-angular';
 import { CoinService } from './../../services/coin.service';
 import { ExchangeModel } from './../../models/exchange.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ExchangeService } from 'src/app/services/exchange.service';
 import { CoinModel } from 'src/app/models/coin.model';
 import { SecurityService } from 'src/app/services/security.service';
@@ -18,6 +18,8 @@ export class ExchangesComponent implements OnInit {
   selected?:string;
   exchangeList: ExchangeModel[] = [];
   coinList: CoinModel[] = [];
+  @ViewChild('confirm')
+  confirm!: ElementRef;
 
   constructor(
     private _exchangeService: ExchangeService,
@@ -72,9 +74,18 @@ export class ExchangesComponent implements OnInit {
   }
 
   clickMethod(name: string) {
-    if(confirm("Desea eliminar este exchange? ")) {
-        this.deleteExchange(name);
-    }
+
+
+    const alertmodal= this.modalService.open(this.confirm, { modalDialogClass: 'dark-modal' });
+    alertmodal.result.then((eliminar) => {
+      this.deleteExchange(name);
+      console.log('deleteado');
+
+    },
+      (cancelar) => {
+
+      }
+    )
   }
 
   onSelectExchange(e:string){

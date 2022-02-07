@@ -12,7 +12,7 @@
         <li><a routerLink="/coins" class="nav-link px-2 ">Coins</a></li>
         <li><a routerLink="/exchanges" class="nav-link px-2 ">Exchanges</a></li>
         <li *ngIf="(auth.isAuthenticated$ | async)"><a routerLink="/mycoins" class="nav-link px-2">Mis Monedas</a></li>
-        <li><a routerLink="/profile" class="nav-link px-2 ">Mi perfil</a></li>
+        <li><a *ngIf="(auth.isAuthenticated$ | async)" routerLink="/profile" class="nav-link px-2 ">Mi perfil</a></li>
 
         <li><a routerLink="/about" class="nav-link px-2 ">About</a></li>
 

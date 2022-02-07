@@ -73,3 +73,18 @@
     </div>
   </div>
 </div>
+<ng-template #confirm let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Advertencia</h4>
+    <button type="btn btn-light" class="btn btn-light" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>¿Desea realmente eliminar este exchange?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Close click')">Cancelar</button>
+    <button type="button" class="btn btn-outline-danger" (click)="modal.close('Close click')">Si</button>
+  </div>
+</ng-template>

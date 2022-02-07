@@ -13,7 +13,7 @@
   <table class="table table-dark table-hover align-middle mt-4">
     <thead class="bg-dark ">
       <th></th>
-      <th><i class="far fa-star"></i></th>
+      <th><i *ngIf="(auth.isAuthenticated$ | async)" class="far fa-star"></i></th>
       <th>Simbolo</th>
       <th class="text-start">Nombre</th>
       <th>Precio</th>
@@ -28,7 +28,7 @@
         </td> -->
         <td ></td>
         <td style="height: 60px">
-          <div class="page__toggle">
+          <div *ngIf="(auth.isAuthenticated$ | async)" class="page__toggle">
 
               <label class="toggle" placement="bottom" [ngbTooltip]="includesCoin(coin) ? 'Quitar de favoritas' : 'Agregar a favoritas'">
 
@@ -79,4 +79,24 @@
       </tr>
     </tbody>
   </table>
+
+
 </div>
+
+
+
+<ng-template #confirm let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Advertencia</h4>
+    <button type="btn btn-light" class="btn btn-light" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>¿Desea realmente eliminar la moneda?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Close click')">Cancelar</button>
+    <button type="button" class="btn btn-outline-danger" (click)="modal.close('Close click')">Si</button>
+  </div>
+</ng-template>
