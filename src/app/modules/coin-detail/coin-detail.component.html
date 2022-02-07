@@ -41,7 +41,8 @@
         </div>
       </div>
     </div>
-    <div class="row align-items-start mt-4 mb-4">
+    <div *ngIf="prices.length == 0 || exchanges.length == 0"> <p> No hay informacion para mostrar todavia. </p> </div>
+    <div *ngIf="prices.length > 0 && exchanges.length > 0" class="row align-items-start mt-4 mb-4">
       <div class="col">
         <label>Seleccione exchange</label>
         <ng-select
