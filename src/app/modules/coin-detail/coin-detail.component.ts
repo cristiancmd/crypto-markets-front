@@ -61,7 +61,6 @@ export class CoinDetailComponent implements OnInit {
   onSelectExchange(e: string): void {
     if (this.id !== null) {
       this.selected = e;
-      console.log(this.selected);
       this.getPriceList();
 
     }
@@ -69,7 +68,7 @@ export class CoinDetailComponent implements OnInit {
   onSelectRange(e: number): void {
     if (this.id !== null) {
       this.last = e;
-      console.log('numero es  ', this.last);
+      // console.log('numero es  ', this.last);
       this.getPriceList();
 
     }
@@ -106,7 +105,6 @@ export class CoinDetailComponent implements OnInit {
       this._exchangeService.getExchangeInfoForCoin(this.id).subscribe({
         next: (data: ExchangeModel[]) => {
           this.exchanges = data;
-          console.log('exchanges', this.exchanges);
           if (!this.selectedExchange.id) {
             this.selectedExchange = this.exchanges[0];
             this.selected = this.selectedExchange.id;

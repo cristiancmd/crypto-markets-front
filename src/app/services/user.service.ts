@@ -24,7 +24,6 @@ export class UserService {
   addUserCoin(userCoinId: CoinModel): Observable<UserCoinModel> {
     let usercoin = new UserCoinModel;
     usercoin.coinId = userCoinId.id;
-    console.log(usercoin);
     return this.http.post(`${this.url}/user-coins`, usercoin)
   }
 

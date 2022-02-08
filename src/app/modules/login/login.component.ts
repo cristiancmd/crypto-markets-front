@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
 
     this.securitySrv.login(cred).subscribe(
       {
-        next: (data: any) => { console.log(data)
+        next: (data: any) => {
         if(!data){
           this.wrongCredentials = true;
 

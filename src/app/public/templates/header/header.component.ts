@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit {
     this.auth.isAuthenticated$.subscribe(
       {
         next: (data) => {
-          console.log('auth  ', data)
+          // console.log('auth  ', data)
           // if (data) {
           //   this.toastr.info('Sesion iniciada')
           // }

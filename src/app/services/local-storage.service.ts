@@ -14,7 +14,6 @@ export class LocalStorageService {
   saveSessionData(data: any):boolean {
     let session = localStorage.getItem("session-data")
     if (session) {
-      console.log(session)
       return false;
     } else {
       let datastr = JSON.stringify(data);

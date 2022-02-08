@@ -20,7 +20,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.user$.getUserWithCoinList().subscribe(data=>
       {
-        console.log(data)
         this.user = data;
         this.premium = data.premium || this.premium
         this.userLoaded = Promise.resolve(true);
@@ -38,7 +37,7 @@ export class ProfileComponent implements OnInit {
 
     this.user$.getPaymentLink().subscribe({
 
-      next: (data )=> {console.log(data)
+      next: (data )=> {
       window.location.href = data.url.init_point;
 
     }

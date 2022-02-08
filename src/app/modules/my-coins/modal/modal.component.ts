@@ -41,7 +41,6 @@ export class ModalComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    console.log(this.coin);
 
   }
 
@@ -67,9 +66,8 @@ export class ModalComponent implements OnInit {
     }
 
     if((this.ucoin?.max || this.ucoin?.min)  ){
-      console.log('enviando info..', this.ucoin);
       this.user$.addMaxOrMinToCoin(this.ucoin).subscribe({
-        next: (data)=> {console.log(data)
+        next: (data)=> {
           this.modal.close();
           this.loading=false;
           this.toastr.success(`Alerta para ${this.coin?.name} agregada`);
@@ -83,7 +81,6 @@ export class ModalComponent implements OnInit {
       )
 
     }else{
-      console.log('No coin');
       this.loading=false;
 
 

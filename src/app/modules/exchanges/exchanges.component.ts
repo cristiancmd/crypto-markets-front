@@ -54,7 +54,6 @@ export class ExchangesComponent implements OnInit {
   deleteExchange(id:string){
     this._exchangeService.removeExchange(id).subscribe({
       next: (data:any) => {
-        console.log('eliminado ok ',data);
         this.ngOnInit();
       }
     }
@@ -79,7 +78,6 @@ export class ExchangesComponent implements OnInit {
     const alertmodal= this.modalService.open(this.confirm, { modalDialogClass: 'dark-modal' });
     alertmodal.result.then((eliminar) => {
       this.deleteExchange(name);
-      console.log('deleteado');
 
     },
       (cancelar) => {

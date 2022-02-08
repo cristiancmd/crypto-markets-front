@@ -58,7 +58,6 @@ export class MyCoinsComponent implements OnInit, OnDestroy {
     this.user$.getUserWithCoinList().subscribe({
       next: (data: UserModel) => {
         this.favList = data.usercoins || [];
-        console.log(data);
         this.coinList = data.usercoins || [];
         // this.getCoinList();
         if (data.remainingmails! < 1) {
@@ -76,7 +75,7 @@ export class MyCoinsComponent implements OnInit, OnDestroy {
 
     this.user$.getAllUserCoins().subscribe(ucoins => {
       this.alertCoinList = ucoins;
-      console.log('alertcoinList:   ', this.alertCoinList);
+      // console.log('alertcoinList:   ', this.alertCoinList);
     }).closed
 
 
@@ -110,7 +109,6 @@ export class MyCoinsComponent implements OnInit, OnDestroy {
       this.user$.removeUserCoin(coin.id!).subscribe(
         {
           next: data => {
-            console.log(data);
             this.favList = this.favList.filter(c => c.id != coin.id);
             this.toastr.success(`Moneda: ${coin.name} quitada de favoritas`);
           }
@@ -123,7 +121,6 @@ export class MyCoinsComponent implements OnInit, OnDestroy {
         this.user$.addUserCoin(coin).subscribe(
           {
             next: data => {
-              console.log(data)
               this.favList.push(coin);
               this.toastr.success(`Moneda: ${coin.name} agregada a favoritas`)
             }
@@ -131,7 +128,6 @@ export class MyCoinsComponent implements OnInit, OnDestroy {
 
       }
     this.favcoins$.setCoins(this.favList);
-    console.log(this.favList);
   }
 
   ngOnchanges(): void {
@@ -160,17 +156,14 @@ export class MyCoinsComponent implements OnInit, OnDestroy {
     this.user$.getUserCoinsFor(coin.id!).subscribe(
       {
         next: data => {
-          console.log(data)
           if (!data || !data.length) {
             this.openCreationForm(coin);
 
           } else {
-            console.log('alerta existe');
             // const alertmodal = this.modalService.open(NgbdModalContent, { centered: true })
             const alertmodal = this.modalService.open(NgbdModalContent, { centered: true });
             alertmodal.componentInstance.ucoin = data[0];
             alertmodal.componentInstance.coin = coin;
-            console.log(data);
             alertmodal.result.then((eliminar) => {
               this.removeAlert(data[0])
               this.toastr.success('Alerta eliminada');
@@ -178,7 +171,6 @@ export class MyCoinsComponent implements OnInit, OnDestroy {
             },
 
               (cancelar) => {
-                console.log();
               }
             )
           }
@@ -192,14 +184,12 @@ export class MyCoinsComponent implements OnInit, OnDestroy {
     const modref = this.modalService.open(ModalComponent, { centered: true });
     modref.componentInstance.coin = coin;
     modref.result.then((guardar) => {
-      console.log('alerta guardada');
       this.user$.getAllUserCoins().subscribe(ucoins => { this.alertCoinList = ucoins });
       if(this.remainingsAlert)
         this.toastr.warning('Te quedaste sin alertas gratuitas por hoy. Actualiza tu cuenta a premium para recibir alertas ilimitadas!', 'Atencion', { timeOut: 0 });
 
     },
       (cancelar) => {
-        console.log('cancelado');
       }
 
     )
@@ -209,7 +199,6 @@ export class MyCoinsComponent implements OnInit, OnDestroy {
   removeAlert(ucoin: UserCoinModel) {
     this.user$.removeAlertFrom(ucoin).subscribe({
       next(data) {
-        console.log('Agregado: ', data);
 
       },
       error(data) {

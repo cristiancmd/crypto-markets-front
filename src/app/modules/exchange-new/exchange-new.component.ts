@@ -86,7 +86,6 @@ export class ExchangeNewComponent implements OnInit {
     }
     this.exchangeSvc.addExchange(exch).subscribe({
       next(data) {
-        console.log('Agregado: ', data);
 
       },
       error(data) {

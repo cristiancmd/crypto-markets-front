@@ -49,12 +49,11 @@ export class CoinsComponent implements OnInit, OnDestroy {
             next: (data:UserModel) => {
               this.favList = data.usercoins || [];
               this.favcoins$.setCoins(this.favList);
-              console.log(data);
               // this.getCoinList();
             }
           });
           this.favList = this.favcoins$.obtenerCoins();
-          console.log('coinlist : ', this.favList)
+          // console.log('coinlist : ', this.favList)
         }
       }
 
@@ -73,7 +72,7 @@ export class CoinsComponent implements OnInit, OnDestroy {
     if (coin && this.includesCoin(coin)) {
       // this.removeItem(this.favList, coin);
       this.user$.removeUserCoin(coin.id!).subscribe(
-        { next: data => { console.log(data);
+        { next: data => {
           this.favList = this.favList.filter(c => c.id != coin.id);
           this.favcoins$.setCoins(this.favList);
           this.toastr.success(`Moneda: ${coin.name} quitada de favoritas`);
@@ -85,7 +84,7 @@ export class CoinsComponent implements OnInit, OnDestroy {
     } else
       if (coin) {
         this.user$.addUserCoin(coin).subscribe(
-        { next: data => {console.log(data)
+        { next: data => {
           this.favList.push(coin);
           this.favcoins$.setCoins(this.favList);
           this.toastr.success(`Moneda: ${coin.name} agregada a favoritas`)
@@ -93,7 +92,6 @@ export class CoinsComponent implements OnInit, OnDestroy {
 
       }
 
-    console.log(this.favList);
   }
 
   ngOnchanges(): void {
@@ -129,7 +127,6 @@ export class CoinsComponent implements OnInit, OnDestroy {
   deleteCoin(id: string) {
     this._coinservice.removeCoin(id).subscribe({
       next: (data: any) => {
-        console.log('eliminado ok', data);
         let coin = this.favList.find(c => c.id==id);
         // this.removeItem(this.favList, coin! );
         this.favList = this.favList.filter(c => c.id != coin?.id)

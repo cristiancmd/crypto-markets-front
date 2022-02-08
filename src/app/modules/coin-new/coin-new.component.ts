@@ -44,7 +44,6 @@ export class CoinNewComponent implements OnInit {
     }
     this._coinSvc.addCoin(coin).subscribe({
       next(data) {
-        console.log('Agregado: ', data);
 
 
       },
