@@ -20,10 +20,11 @@
     <thead class="bg-dark">
 
       <th></th>
-      <th><i class="far fa-star"></i></th>
-      <th>Simbolo</th>
-      <th class="text-start">Nombre</th>
-      <th>Precio</th>
+      <th><label><i *ngIf="(auth.isAuthenticated$ | async)" class="far fa-star"></i></label></th>
+      <th > <label>Símbolo</label> </th>
+      <th > <label>Nombre</label> </th>
+      <th > <label>Precio</label> </th>
+
       <th></th>
     </thead>
     <tbody>
@@ -62,8 +63,8 @@
             {{ coin.symbol }}
           </button>
         </td>
-        <td class="text-start" [routerLink]="['/coins/', coin.id]">
-          <button class="btn-1">
+        <td style="padding-left: 0.1rem;" >
+          <button class="btn-1" [routerLink]="['/coins/', coin.id]">
             {{ coin.name }}
           </button>
         </td>

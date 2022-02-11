@@ -16,20 +16,21 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ml-2">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ml-3">
           <li *ngIf="auth.isAuthenticated$ | async">
-            <a routerLink="/coins" class="nav-link px-2">Coins</a>
+            <a routerLink="/coins" class="nav-link px-3">Coins</a>
           </li>
           <li *ngIf="auth.isAuthenticated$ | async">
-            <a routerLink="/exchanges" class="nav-link px-2">Exchanges</a>
+            <a routerLink="/exchanges" class="nav-link px-3">Exchanges</a>
           </li>
           <li *ngIf="auth.isAuthenticated$ | async">
-            <a routerLink="/mycoins" class="nav-link px-2">Mis Monedas</a>
+            <a routerLink="/mycoins" class="nav-link px-3">Mis Monedas</a>
           </li>
           <li *ngIf="auth.isAuthenticated$ | async">
-            <a routerLink="/profile" class="nav-link px-2">Mi perfil</a>
+            <a routerLink="/profile" class="nav-link px-3">Perfil</a>
           </li>
-          <li *ngIf="auth.isAuthenticated$ | async"><a routerLink="/about" class="nav-link px-2">About</a></li>
+          <li *ngIf="auth.isAuthenticated$ | async">
+            <a routerLink="/about" class="nav-link px-3">About</a></li>
         </ul>
 
         <div class="d-flex flex-row justify-content-end">

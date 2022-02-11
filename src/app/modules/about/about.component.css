@@ -1,0 +1,121 @@
+body {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: #34495e;
+}
+
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 160px;
+  overflow: hidden;
+  font-family: "Lato", sans-serif;
+  font-size: 25px;
+  line-height: 30px;
+  color: #8d0582;
+}
+.content__container {
+  font-weight: 600;
+  overflow: hidden;
+  height: 30px;
+  padding: 0 30px;
+}
+.content__container:before {
+  content: "[";
+  left: 0;
+}
+.content__container:after {
+  content: "]";
+  position: absolute;
+  right: 0;
+}
+.content__container:after, .content__container:before {
+  position: absolute;
+  top: 0;
+  color: #042f8b;
+  font-size: 32px;
+  line-height: 30px;
+  -webkit-animation-name: opacity;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: infinite;
+  animation-name: opacity;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+.content__container__text {
+  display: inline;
+  float: left;
+  margin: 0;
+}
+.content__container__list {
+  margin-top: 0;
+  padding-left: 308px;
+  text-align: left;
+  list-style: none;
+  -webkit-animation-name: change;
+  -webkit-animation-duration: 5s;
+  -webkit-animation-iteration-count: infinite;
+  animation-name: change;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+}
+.content__container__list__item {
+  line-height: 30px;
+  margin: 0;
+}
+
+@-webkit-keyframes opacity {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes change {
+  0%, 12.66%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  16.66%, 29.32% {
+    transform: translate3d(0, -25%, 0);
+  }
+  33.32%, 45.98% {
+    transform: translate3d(0, -50%, 0);
+  }
+  49.98%, 62.64% {
+    transform: translate3d(0, -75%, 0);
+  }
+  0%, 12.66%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+}
+@keyframes opacity {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes change {
+  0%, 12.66%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  16.66%, 29.32% {
+    transform: translate3d(0, -25%, 0);
+  }
+  33.32%, 45.98% {
+    transform: translate3d(0, -50%, 0);
+  }
+  49.98%, 62.64% {
+    transform: translate3d(0, -75%, 0);
+  }
+  0%, 12.66%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+}

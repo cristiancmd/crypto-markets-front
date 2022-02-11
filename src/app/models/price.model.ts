@@ -3,7 +3,7 @@ export class PriceModel{
   id?:string;
   coinId?:string;
   exchangeId?:string;
-  value?:number;
+  value?: number;
   date?:Date;
 
 }

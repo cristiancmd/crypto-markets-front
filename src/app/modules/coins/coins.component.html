@@ -5,20 +5,21 @@
     <button
       *ngIf="auth.isAuthenticated$ | async"
       type="button"
-      class="btn btn-outline-dark mt-4 mb-2"
+      class="btn btn-outline-dark mt-2 mb-2"
       routerLink="/coins/new"
     >
       Agregar
     </button>
   </div>
 
-  <table class="table table-dark table-hover align-middle mt-4">
+  <table class="table table-dark table-hover align-middle mt-3">
     <thead class="bg-dark ">
       <th></th>
-      <th><i *ngIf="(auth.isAuthenticated$ | async)" class="far fa-star"></i></th>
-      <th>Simbolo</th>
-      <th class="text-start">Nombre</th>
-      <th>Precio</th>
+      <th><label><i *ngIf="(auth.isAuthenticated$ | async)" class="far fa-star"></i></label></th>
+      <th > <label>Símbolo</label> </th>
+      <th > <label>Nombre</label> </th>
+      <th > <label>Precio</label> </th>
+      <th> <label>Últimos 7 días</label> </th>
       <th></th>
     </thead>
 
@@ -50,7 +51,7 @@
           <img
             *ngIf="coin.symbol"
             src="assets/svg/icon/{{ coin.symbol?.toLowerCase() }}.svg"
-            alt="coin"
+            alt=""
             style="width: 25px; height: auto"
           />
 
@@ -58,13 +59,16 @@
             {{ coin.symbol }}
           </button>
         </td>
-        <td class="text-start" [routerLink]="['/coins/', coin.id]">
+        <td style="padding-left: 0.1rem;" [routerLink]="['/coins/', coin.id]">
           <button class="btn-1">
             {{ coin.name }}
           </button>
         </td>
         <td  class="text-start  ">
           {{ coin.avgPrice | currency }}
+        </td>
+        <td>
+          <img *ngIf="coin.miniChart" src="{{coin.miniChart}}" alt="">
         </td>
         <td >
           <button class="btn-1" >
@@ -75,6 +79,7 @@
             ></i>
           </button>
         </td>
+
         <!-- <td>
           <i class="far fa-edit"></i>
         </td> -->

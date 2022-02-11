@@ -22,6 +22,8 @@ export class CoinDetailComponent implements OnInit {
   selectedExchange: ExchangeModel = {}
   selected: string | undefined;
   last: number = 1;
+  checkbox:string = 'line';
+
   ranges: any = [
     { id: 0, name: "30 minutos", value: 0.5 },
     { id: 1, name: "1 hora", value: 1 },
@@ -84,22 +86,7 @@ export class CoinDetailComponent implements OnInit {
     }
   }
 
-  // getExchanges() {
-  //   if (this.id !== null) {
-  //     this._coinService.getRelatedExchanges(this.id).subscribe({
-  //       next: (data: ExchangeModel[]) => {
-  //         this.exchanges = data;
-  //         console.log('exchanges', this.exchanges);
-  //         if (!this.selectedExchange.id) {
-  //           this.selectedExchange = this.exchanges[0];
-  //           this.selected = this.selectedExchange.id;
-  //         }
 
-  //         this.getPriceList();
-  //       }
-  //     });
-  //   }
-  // }
   getExchanges() {
     if (this.id !== null) {
       this._exchangeService.getExchangeInfoForCoin(this.id).subscribe({
@@ -132,6 +119,9 @@ export class CoinDetailComponent implements OnInit {
     }
   }
 
+  checkBoxChart(event:any){
+      this.checkbox = event.target.value;
+  }
 
 
 }

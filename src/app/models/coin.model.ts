@@ -9,6 +9,6 @@ export class CoinModel {
 
   avgPrice?: number;
   icon?:string;
-
+  miniChart?:string;
 
 }
