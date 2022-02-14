@@ -10,7 +10,7 @@
   <div>
 
     <div *ngIf="!this.loading && this.favList.length<1" class="alert alert-warning alert-dismissible fade show mt-4 mb-2" role="alert">
-      <strong>No tienes monedas!</strong> Agrega monedas a tus favoritas para poder gestionarlas y generar alertas.
+      <strong>No tienes monedas!</strong> Selecciona monedas como favoritas para poder gestionarlas y generar alertas.
       <div class="mt-2"><button [routerLink]="['/coins']" class="btn btn-outline-dark">Ir a Monedas</button> </div>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
